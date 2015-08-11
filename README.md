@@ -1,0 +1,2 @@
+# NHaseAPI
+HBase Thrift API
