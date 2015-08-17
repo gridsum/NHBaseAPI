@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHBaseThrift", "NHBaseThrift\NHBaseThrift.csproj", "{BCD9FF49-D6E8-4C64-825C-A39414BB27F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Original Thrift Test Projects", "Original Thrift Test Projects", "{799E1F72-4C4C-43BB-9A26-6FB4409BD770}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IThrift", "Original\IThrift\IThrift.csproj", "{CC1EBC28-692E-4652-A794-AF07439EDEB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHBaseThrift.BatchInsertTest", "Original\NHBaseThrift.BatchInsertTest\NHBaseThrift.BatchInsertTest.csproj", "{823F8932-20DD-433C-81D1-8C4A36641504}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thrift", "Original\Thrift\Thrift.csproj", "{499EB63C-D74C-47E8-AE48-A2FC94538E9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C0FC8A41-120B-4672-9C05-2DAE8B3B85B7}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCD9FF49-D6E8-4C64-825C-A39414BB27F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCD9FF49-D6E8-4C64-825C-A39414BB27F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCD9FF49-D6E8-4C64-825C-A39414BB27F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCD9FF49-D6E8-4C64-825C-A39414BB27F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC1EBC28-692E-4652-A794-AF07439EDEB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC1EBC28-692E-4652-A794-AF07439EDEB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC1EBC28-692E-4652-A794-AF07439EDEB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC1EBC28-692E-4652-A794-AF07439EDEB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{823F8932-20DD-433C-81D1-8C4A36641504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{823F8932-20DD-433C-81D1-8C4A36641504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{823F8932-20DD-433C-81D1-8C4A36641504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{823F8932-20DD-433C-81D1-8C4A36641504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{499EB63C-D74C-47E8-AE48-A2FC94538E9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{499EB63C-D74C-47E8-AE48-A2FC94538E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{499EB63C-D74C-47E8-AE48-A2FC94538E9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{499EB63C-D74C-47E8-AE48-A2FC94538E9D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CC1EBC28-692E-4652-A794-AF07439EDEB4} = {799E1F72-4C4C-43BB-9A26-6FB4409BD770}
+		{823F8932-20DD-433C-81D1-8C4A36641504} = {799E1F72-4C4C-43BB-9A26-6FB4409BD770}
+		{499EB63C-D74C-47E8-AE48-A2FC94538E9D} = {799E1F72-4C4C-43BB-9A26-6FB4409BD770}
+	EndGlobalSection
+EndGlobal

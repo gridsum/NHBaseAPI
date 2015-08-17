@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BCD9FF49-D6E8-4C64-825C-A39414BB27F9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NHBaseThrift</RootNamespace>
+    <AssemblyName>NHBaseThrift</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Debug\NHBaseThrift.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Basic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Basic.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Cache, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Data.Synchronization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Data.Synchronization.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Dynamic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.IO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Messages, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Messages.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Net, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Net.Channels, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Net.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Net.Cloud, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Net.Cloud.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Net.Transaction, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Net.Transaction.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Platform.Deploy.CSN.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Platform.Deploy.CSN.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Platform.Deploy.CSN.NetworkLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Platform.Deploy.CSN.NetworkLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Platform.Deploy.CSN.ProtocolStack, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Platform.Deploy.CSN.ProtocolStack.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Platform.Deploy.Metadata, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Platform.Deploy.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.ServiceModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.ServiceModel.Bussiness.Default, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.ServiceModel.Bussiness.Default.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.ServiceModel.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.ServiceModel.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Test.LoadRunner, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\KJFramework.Test.LoadRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="mysql.data, Version=6.4.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\KJFramework.1.0.6\lib\net40\mysql.data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ZooKeeperNet, Version=3.4.6.1, Culture=neutral, PublicKeyToken=fefd2c046da35b56, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ZooKeeper.Net.3.4.6.2\lib\net40\ZooKeeperNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analyzing\Analyser.cs" />
+    <Compile Include="Analyzing\AnalyseResult.cs" />
+    <Compile Include="Analyzing\GetObjectAnalyseResult.cs" />
+    <Compile Include="Analyzing\GetObjectIntellectTypeAnalyser.cs" />
+    <Compile Include="Analyzing\IAnalyseResult.cs" />
+    <Compile Include="Analyzing\IThriftProtocolTypeAnalyser.cs" />
+    <Compile Include="Analyzing\ThriftProtocolTypeAnalyser.cs" />
+    <Compile Include="Analyzing\ToBytesAnalyseResult.cs" />
+    <Compile Include="Analyzing\ToBytesAnalyseSet.cs" />
+    <Compile Include="Analyzing\ToBytesIntellectTypeAnalyser.cs" />
+    <Compile Include="Attributes\ThriftPropertyAttribute.cs" />
+    <Compile Include="Client\HBaseClient.cs" />
+    <Compile Include="Client\HTable.cs" />
+    <Compile Include="Client\Scanner.cs" />
+    <Compile Include="Comparator\ByteArrayComparator.cs" />
+    <Compile Include="Comparator\IByteArrayComparator.cs" />
+    <Compile Include="Enums\CompareResult.cs" />
+    <Compile Include="Exceptions\UnknownObjectTypeException.cs" />
+    <Compile Include="Exceptions\BadFormatException.cs" />
+    <Compile Include="Exceptions\ZooKeeperInitializationException.cs" />
+    <Compile Include="Exceptions\IPMappingFailException.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="HTableRegionManager.cs" />
+    <Compile Include="Client\IHBaseClient.cs" />
+    <Compile Include="Client\IHTable.cs" />
+    <Compile Include="Consts.cs" />
+    <Compile Include="Exceptions\RegionNotFoundException.cs" />
+    <Compile Include="Exceptions\CommunicationTimeoutException.cs" />
+    <Compile Include="Exceptions\CommunicationFailException.cs" />
+    <Compile Include="Exceptions\NoConnectionException.cs" />
+    <Compile Include="Exceptions\AlreadyExistsException.cs" />
+    <Compile Include="Exceptions\IllegalArgumentException.cs" />
+    <Compile Include="Exceptions\IncorrectCalculationException.cs" />
+    <Compile Include="Exceptions\IOErrorException.cs" />
+    <Compile Include="Helpers\InstanceHelper.cs" />
+    <Compile Include="Helpers\ThriftObjectArrayHelper.cs" />
+    <Compile Include="HostMappingManager.cs" />
+    <Compile Include="IHostMappingManager.cs" />
+    <Compile Include="IHTableRegionManager.cs" />
+    <Compile Include="Messages\AtomicIncrementRequestMessage.cs" />
+    <Compile Include="Messages\AtomicIncrementResponseMessage.cs" />
+    <Compile Include="Messages\GetRowRequestMessage.cs" />
+    <Compile Include="Messages\GetRowResponseMessage.cs" />
+    <Compile Include="Messages\GetRowWithColumnsRequestMessage.cs" />
+    <Compile Include="Messages\GetRowWithColumnsResponseMessage.cs" />
+    <Compile Include="Messages\GetTableNamesResponseMessage.cs" />
+    <Compile Include="Messages\GetTableNamesRequestMessage.cs" />
+    <Compile Include="Messages\DeleteTableResponseMessage.cs" />
+    <Compile Include="Messages\DisableTableResponseMessage.cs" />
+    <Compile Include="Messages\EnableTableResponseMessage.cs" />
+    <Compile Include="Messages\GetTableRegionsResponseMessage.cs" />
+    <Compile Include="Messages\GetTableRegionsRequestMessage.cs" />
+    <Compile Include="Messages\CreateTableResponseMessage.cs" />
+    <Compile Include="Messages\InsertNewRowResponseMessage.cs" />
+    <Compile Include="Messages\InsertNewRowsRequestMessage.cs" />
+    <Compile Include="Messages\InsertNewRowsResponseMessage.cs" />
+    <Compile Include="Messages\IsTableEnableRequestMessage.cs" />
+    <Compile Include="Messages\IsTableEnableResponseMessage.cs" />
+    <Compile Include="Messages\ScannerCloseRequestMessage.cs" />
+    <Compile Include="Messages\ScannerCloseResponseMessage.cs" />
+    <Compile Include="Messages\ScannerGetListRequestMessage.cs" />
+    <Compile Include="Messages\ScannerGetListResponseMessage.cs" />
+    <Compile Include="Messages\ScannerGetRequestMessage.cs" />
+    <Compile Include="Messages\ScannerGetResponseMessage.cs" />
+    <Compile Include="Messages\ScannerOpenWithStopRequestMessage.cs" />
+    <Compile Include="Messages\ScannerOpenWithStopResponseMessage.cs" />
+    <Compile Include="Network\Agents\ThriftConnectionAgent.cs" />
+    <Compile Include="Network\Agents\IClientConnectionAgent.cs" />
+    <Compile Include="Network\Agents\IConnectionAgent.cs" />
+    <Compile Include="Network\ConnectionPool.cs" />
+    <Compile Include="Network\ConnectionSet.cs" />
+    <Compile Include="Network\SequentialConnectionSet.cs" />
+    <Compile Include="Network\ThriftProtocolConnectionPool.cs" />
+    <Compile Include="Network\RamdomConnectionSet.cs" />
+    <Compile Include="Network\ThriftProtocolSegmentDataParser.cs" />
+    <Compile Include="Network\ThriftProtocolStack.cs" />
+    <Compile Include="Network\ThriftSegmentNode.cs" />
+    <Compile Include="Network\Transactions\ThriftMessageTransaction.cs" />
+    <Compile Include="Network\Transactions\ThriftMessageTransactionManager.cs" />
+    <Compile Include="Network\INetworkDataContainer.cs" />
+    <Compile Include="Engine\ThriftObjectEngine.cs" />
+    <Compile Include="Enums\GetObjectResultTypes.cs" />
+    <Compile Include="Enums\MessageTypes.cs" />
+    <Compile Include="Exceptions\DefineNoMeaningException.cs" />
+    <Compile Include="Exceptions\ExceptionMessage.cs" />
+    <Compile Include="Exceptions\PropertyNullValueException.cs" />
+    <Compile Include="Exceptions\SpecificKeyNotExistsException.cs" />
+    <Compile Include="Exceptions\UnexpectedValueException.cs" />
+    <Compile Include="Helpers\DynamicHelper.cs" />
+    <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="Helpers\FixedTypeManager.cs" />
+    <Compile Include="Messages\InsertNewRowRequestMessage.cs" />
+    <Compile Include="Messages\EnableTableRequestMessage.cs" />
+    <Compile Include="Messages\DisableTableRequestMessage.cs" />
+    <Compile Include="Messages\DeleteTableRequestMessage.cs" />
+    <Compile Include="Messages\CreateTableRequestMessage.cs" />
+    <Compile Include="Messages\ThriftMessage.cs" />
+    <Compile Include="Network\NetworkDataCheckResult.cs" />
+    <Compile Include="Network\NetworkDataContainer.cs" />
+    <Compile Include="Objects\BatchMutation.cs" />
+    <Compile Include="Objects\Cell.cs" />
+    <Compile Include="Objects\Column.cs" />
+    <Compile Include="Objects\ColumnDescriptor.cs" />
+    <Compile Include="Contracts\IThriftObject.cs" />
+    <Compile Include="Contracts\ThriftObject.cs" />
+    <Compile Include="Enums\PropertyTypes.cs" />
+    <Compile Include="Objects\AlreadyExistsError.cs" />
+    <Compile Include="Objects\IllegalArgumentError.cs" />
+    <Compile Include="Objects\IOError.cs" />
+    <Compile Include="Objects\MessageIdentity.cs" />
+    <Compile Include="Objects\Mutation.cs" />
+    <Compile Include="Objects\ColumnInfo.cs" />
+    <Compile Include="Objects\Region.cs" />
+    <Compile Include="Objects\RowInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxies\IMemorySegment.cs" />
+    <Compile Include="Proxies\IMemorySegmentProxy.cs" />
+    <Compile Include="Proxies\ThriftProtocolMemoryAllotter.cs" />
+    <Compile Include="Proxies\MemoryPosition.cs" />
+    <Compile Include="Proxies\MemorySegment.cs" />
+    <Compile Include="Proxies\MemorySegmentProxy.cs" />
+    <Compile Include="Proxies\MemorySegmentProxyFactory.cs" />
+    <Compile Include="Proxies\Size.cs" />
+    <Compile Include="RegionInfo.cs" />
+    <Compile Include="Stubs\IPropertySetStub.cs" />
+    <Compile Include="Stubs\IPropertyStub.cs" />
+    <Compile Include="Stubs\PropertySetStubHelper.cs" />
+    <Compile Include="Stubs\PropertyStubHelper.cs" />
+    <Compile Include="Stubs\VT.cs" />
+    <Compile Include="Helpers\TypeConversionHelper.cs" />
+    <Compile Include="TypeProcessors\ByteThriftTypeProcessor.cs" />
+    <Compile Include="TypeProcessors\BoolThriftTypeProcessor.cs" />
+    <Compile Include="TypeProcessors\Int64ThriftTypeProcessor.cs" />
+    <Compile Include="TypeProcessors\Int32ThriftTypeProcessor.cs" />
+    <Compile Include="TypeProcessors\MessageIdentityTypeProcessor.cs" />
+    <Compile Include="TypeProcessors\MapStringCellThriftTypeProcessor.cs" />
+    <Compile Include="TypeProcessors\MapStringStringThriftTypeProcessor.cs" />
+    <Compile Include="TypeProcessors\ByteArrayThriftTypeProcessor.cs" />
+    <Compile Include="TypeProcessors\StringArrayThriftTypeProcessor.cs" />
+    <Compile Include="TypeProcessors\StringThriftTypeProcessor.cs" />
+    <Compile Include="TypeProcessors\Int16ThriftTypeProcessor.cs" />
+    <Compile Include="TypeProcessors\ThriftTypeProcessor.cs" />
+    <Compile Include="TypeProcessors\IThriftTypeProcessor.cs" />
+    <Compile Include="TypeProcessors\Maps\ArrayTypeProcessorMapping.cs" />
+    <Compile Include="TypeProcessors\Maps\ThriftTypeProcessorMapping.cs" />
+    <Compile Include="ZooKeeperWatcher.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="NHBaseThrift.nuspec" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
