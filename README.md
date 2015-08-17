@@ -92,7 +92,7 @@ client.DeleteTable("TableName");
 //Initialization Omitted
 IHBaseClient client = new HBaseClient(connectionStr)
 IHTable table = client.GetTable("TableName");
-string tableName = string.Format("mediad_test_thrift_table_test_{0}", DateTime.Now.Millisecond);
+string tableName = string.Format("test_thrift_table_test_{0}", DateTime.Now.Millisecond);
 ColumnInfo[] columninfos = new[]
 {
 	new ColumnInfo
