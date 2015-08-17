@@ -63,14 +63,16 @@ IHBaseClient client = new HBaseClient(connectionStr)
 ```
 A ConnectionStr may contain many settings. A simple way to initialize is to only put zk information in the ConnectionStr.
 Settings in the ConnectionStr:
+
 | Settings | Default | Description | Optional |
-| -----  | -----  | ---- | -----    |
+| -------------  | -------------  | ------------- | -------------  |
 |zkTimeout|00:00:30|Session Timeout for remote ZooKeeper|Y|
 |memSegSize|256|Size of a single memory segment when receiving network data. Unit: Byte. Value from 64 to 1024 in times of 64.|Y|
 |memSegMultiples|100000|Size of unmanaged memory currently applied. Equals Multiples * SegmentSize|Y|
 |minConnection|1|Minimum connections maintained for the same remote TCP IP and port|Y|
 |maxConnection|3|Maximum connections maintained for the same remote TCP IP and port|Y|
 |allowPrintDumpInfo|false|Allow or not the printing of network errors’ details when such internal errors occurred|Y|
+
 - Create Table Operation
 ```csharp
 //Initialization Omitted
