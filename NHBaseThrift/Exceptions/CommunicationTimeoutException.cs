@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NHBaseThrift.Exceptions
+namespace Gridsum.NHBaseThrift.Exceptions
 {
     /// <summary>
     ///     通信超时异常

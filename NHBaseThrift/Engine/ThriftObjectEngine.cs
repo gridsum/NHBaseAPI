@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gridsum.NHBaseThrift.Analyzing;
+using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Contracts;
+using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Exceptions;
+using Gridsum.NHBaseThrift.Helpers;
+using Gridsum.NHBaseThrift.Network;
+using Gridsum.NHBaseThrift.Proxies;
+using Gridsum.NHBaseThrift.Stubs;
+using Gridsum.NHBaseThrift.TypeProcessors;
+using Gridsum.NHBaseThrift.TypeProcessors.Maps;
 using KJFramework.Tracing;
-using NHBaseThrift.Analyzing;
-using NHBaseThrift.Attributes;
-using NHBaseThrift.Contracts;
-using NHBaseThrift.Enums;
-using NHBaseThrift.Exceptions;
-using NHBaseThrift.Helpers;
-using NHBaseThrift.Network;
-using NHBaseThrift.Proxies;
-using NHBaseThrift.Stubs;
-using NHBaseThrift.TypeProcessors;
-using NHBaseThrift.TypeProcessors.Maps;
 
-namespace NHBaseThrift.Engine
+namespace Gridsum.NHBaseThrift.Engine
 {
     /// <summary>
     ///     Thrift对象引擎，提供了相关的基本操作

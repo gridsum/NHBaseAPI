@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Exceptions
+﻿namespace Gridsum.NHBaseThrift.Exceptions
 {
     /// <summary>
     ///     已经存在指定资源异常

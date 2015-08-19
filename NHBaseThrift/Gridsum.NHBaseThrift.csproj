@@ -7,8 +7,8 @@
     <ProjectGuid>{BCD9FF49-D6E8-4C64-825C-A39414BB27F9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NHBaseThrift</RootNamespace>
-    <AssemblyName>NHBaseThrift</AssemblyName>
+    <RootNamespace>Gridsum.NHBaseThrift</RootNamespace>
+    <AssemblyName>Gridsum.NHBaseThrift</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -23,7 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\Debug\NHBaseThrift.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Gridsum.NHBaseThrift.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

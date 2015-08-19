@@ -1,14 +1,14 @@
 ﻿using System;
-using NHBaseThrift.Analyzing;
-using NHBaseThrift.Contracts;
-using NHBaseThrift.Engine;
-using NHBaseThrift.Enums;
-using NHBaseThrift.Exceptions;
-using NHBaseThrift.Network;
-using NHBaseThrift.TypeProcessors;
-using NHBaseThrift.TypeProcessors.Maps;
+using Gridsum.NHBaseThrift.Analyzing;
+using Gridsum.NHBaseThrift.Contracts;
+using Gridsum.NHBaseThrift.Engine;
+using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Exceptions;
+using Gridsum.NHBaseThrift.Network;
+using Gridsum.NHBaseThrift.TypeProcessors;
+using Gridsum.NHBaseThrift.TypeProcessors.Maps;
 
-namespace NHBaseThrift.Helpers
+namespace Gridsum.NHBaseThrift.Helpers
 {
     /// <summary>
     ///     实例帮助器

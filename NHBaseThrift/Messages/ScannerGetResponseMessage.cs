@@ -1,8 +1,8 @@
-﻿using NHBaseThrift.Attributes;
-using NHBaseThrift.Enums;
-using NHBaseThrift.Objects;
+﻿using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Objects;
 
-namespace NHBaseThrift.Messages
+namespace Gridsum.NHBaseThrift.Messages
 {
     /// <summary>
     ///		根据scanner获取一批数据请求

@@ -1,12 +1,12 @@
 using System;
 using System.Text;
+using Gridsum.NHBaseThrift.Exceptions;
+using Gridsum.NHBaseThrift.Helpers;
+using Gridsum.NHBaseThrift.Objects;
 using KJFramework.Net.Channels.Events;
 using KJFramework.Net.Channels.Objects;
-using NHBaseThrift.Exceptions;
-using NHBaseThrift.Helpers;
-using NHBaseThrift.Objects;
 
-namespace NHBaseThrift.Network
+namespace Gridsum.NHBaseThrift.Network
 {
     /// <summary>
     ///    ÍøÂ·Êý¾ÝÈÝÆ÷

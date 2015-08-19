@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace NHBaseThrift.Helpers
+namespace Gridsum.NHBaseThrift.Helpers
 {
     /// <summary>
     ///     为PropertyInfo的获取和设置提供解决方案

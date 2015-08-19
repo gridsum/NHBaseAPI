@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NHBaseThrift.Exceptions
+namespace Gridsum.NHBaseThrift.Exceptions
 {
 	/// <summary>
 	///		An IOError exception signals that an error occurred communicating to the Hbase master or an Hbase region server. Also used to return more general Hbase error conditions. 

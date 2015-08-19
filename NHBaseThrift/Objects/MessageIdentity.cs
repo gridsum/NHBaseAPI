@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Objects
+﻿namespace Gridsum.NHBaseThrift.Objects
 {
     /// <summary>
     ///     Thrift message head.

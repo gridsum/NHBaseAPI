@@ -1,10 +1,10 @@
 ﻿using System;
+using Gridsum.NHBaseThrift.Messages;
 using KJFramework.Net.Channels;
 using KJFramework.Net.Transaction;
 using KJFramework.Tracing;
-using NHBaseThrift.Messages;
 
-namespace NHBaseThrift.Network.Transactions
+namespace Gridsum.NHBaseThrift.Network.Transactions
 {
     /// <summary>
     ///     Thrift协议消息事务，提供了相关的基本操作

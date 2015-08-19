@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gridsum.NHBaseThrift.Engine;
+using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Messages;
+using Gridsum.NHBaseThrift.Objects;
 using KJFramework.EventArgs;
 using KJFramework.Net.Channels.Events;
 using KJFramework.Net.Channels.Parsers;
 using KJFramework.Tracing;
-using NHBaseThrift.Engine;
-using NHBaseThrift.Enums;
-using NHBaseThrift.Messages;
-using NHBaseThrift.Objects;
 
-namespace NHBaseThrift.Network
+namespace Gridsum.NHBaseThrift.Network
 {
     /// <summary>
     ///    Thrift协议内存片段数据解析器

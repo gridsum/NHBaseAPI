@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
+using Gridsum.NHBaseThrift.Messages;
+using Gridsum.NHBaseThrift.Network.Agents;
 using KJFramework.EventArgs;
 using KJFramework.Net.ProtocolStacks;
 using KJFramework.Tracing;
-using NHBaseThrift.Messages;
-using NHBaseThrift.Network.Agents;
 
-namespace NHBaseThrift.Network
+namespace Gridsum.NHBaseThrift.Network
 {
     /// <summary>
     ///    存放连接的容器

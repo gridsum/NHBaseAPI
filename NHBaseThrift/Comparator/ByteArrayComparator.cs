@@ -1,6 +1,6 @@
-﻿using NHBaseThrift.Enums;
+﻿using Gridsum.NHBaseThrift.Enums;
 
-namespace NHBaseThrift.Comparator
+namespace Gridsum.NHBaseThrift.Comparator
 {
 	/// <summary>
 	///		字节数组比较器

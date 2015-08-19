@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using NHBaseThrift.Analyzing;
-using NHBaseThrift.Attributes;
-using NHBaseThrift.Enums;
-using NHBaseThrift.Helpers;
-using NHBaseThrift.Network;
-using NHBaseThrift.Proxies;
+using Gridsum.NHBaseThrift.Analyzing;
+using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Helpers;
+using Gridsum.NHBaseThrift.Network;
+using Gridsum.NHBaseThrift.Proxies;
 
-namespace NHBaseThrift.TypeProcessors
+namespace Gridsum.NHBaseThrift.TypeProcessors
 {
     public class MapStringStringThriftTypeProcessor : ThriftTypeProcessor
     {

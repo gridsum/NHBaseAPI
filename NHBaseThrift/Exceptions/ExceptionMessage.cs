@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Exceptions
+﻿namespace Gridsum.NHBaseThrift.Exceptions
 {
     /// <summary>
     ///     异常信息静态存储结构

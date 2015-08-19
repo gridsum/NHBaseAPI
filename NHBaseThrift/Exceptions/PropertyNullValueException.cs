@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NHBaseThrift.Exceptions
+namespace Gridsum.NHBaseThrift.Exceptions
 {
     /// <summary>
     ///     字段值为空异常

@@ -1,8 +1,8 @@
-﻿using NHBaseThrift.Attributes;
-using NHBaseThrift.Enums;
-using NHBaseThrift.Objects;
+﻿using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Objects;
 
-namespace NHBaseThrift.Messages
+namespace Gridsum.NHBaseThrift.Messages
 {
     /// <summary>
     ///     Request mesasge for enable HBase table command.

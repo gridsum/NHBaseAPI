@@ -4,18 +4,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using Gridsum.NHBaseThrift.Exceptions;
+using Gridsum.NHBaseThrift.Messages;
+using Gridsum.NHBaseThrift.Network;
+using Gridsum.NHBaseThrift.Network.Agents;
+using Gridsum.NHBaseThrift.Network.Transactions;
+using Gridsum.NHBaseThrift.Objects;
+using Gridsum.NHBaseThrift.Proxies;
 using KJFramework.EventArgs;
 using KJFramework.Tracing;
-using NHBaseThrift.Exceptions;
-using NHBaseThrift.Messages;
-using NHBaseThrift.Network;
-using NHBaseThrift.Network.Agents;
-using NHBaseThrift.Network.Transactions;
-using NHBaseThrift.Objects;
-using NHBaseThrift.Proxies;
 using ZooKeeperNet;
 
-namespace NHBaseThrift.Client
+namespace Gridsum.NHBaseThrift.Client
 {
     /// <summary>
     ///     HBase基于Thrift通信协议的客户端实现

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text;
+using Gridsum.NHBaseThrift.Exceptions;
+using Gridsum.NHBaseThrift.Objects;
 using KJFramework.Net.Channels.Events;
-using NHBaseThrift.Exceptions;
-using NHBaseThrift.Objects;
 
-namespace NHBaseThrift.Network
+namespace Gridsum.NHBaseThrift.Network
 {
     /// <summary>
     ///    网络数据容器接口

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using NHBaseThrift.Helpers;
-using NHBaseThrift.Stubs;
+using Gridsum.NHBaseThrift.Helpers;
+using Gridsum.NHBaseThrift.Stubs;
 
-namespace NHBaseThrift.Analyzing
+namespace Gridsum.NHBaseThrift.Analyzing
 {
     /// <summary>
     ///     类型分析器，提供了相关的基本操作。

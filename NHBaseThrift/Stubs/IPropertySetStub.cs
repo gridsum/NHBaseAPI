@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace NHBaseThrift.Stubs
+namespace Gridsum.NHBaseThrift.Stubs
 {
     /// <summary>
     ///     字段处理器存根接口

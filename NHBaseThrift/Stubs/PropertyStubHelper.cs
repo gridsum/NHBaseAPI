@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace NHBaseThrift.Stubs
+namespace Gridsum.NHBaseThrift.Stubs
 {
     /// <summary>
     ///     字段存根帮助器

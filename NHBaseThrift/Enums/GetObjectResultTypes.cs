@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Enums
+﻿namespace Gridsum.NHBaseThrift.Enums
 {
     /// <summary>
     ///     解析Thrift协议对象的结果类型

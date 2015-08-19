@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHBaseThrift", "NHBaseThrift\NHBaseThrift.csproj", "{BCD9FF49-D6E8-4C64-825C-A39414BB27F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gridsum.NHBaseThrift", "NHBaseThrift\Gridsum.NHBaseThrift.csproj", "{BCD9FF49-D6E8-4C64-825C-A39414BB27F9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Original Thrift Test Projects", "Original Thrift Test Projects", "{799E1F72-4C4C-43BB-9A26-6FB4409BD770}"
 EndProject

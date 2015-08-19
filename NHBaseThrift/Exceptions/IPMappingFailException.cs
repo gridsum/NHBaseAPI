@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Exceptions
+﻿namespace Gridsum.NHBaseThrift.Exceptions
 {
     /// <summary>
     ///     找不到主机名对应的IP地址异常

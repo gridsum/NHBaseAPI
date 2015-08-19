@@ -4,8 +4,9 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
-using NHBaseThrift.Client;
-using NHBaseThrift.Objects;
+using Gridsum.NHBaseThrift.Client;
+using Gridsum.NHBaseThrift.Helpers;
+using Gridsum.NHBaseThrift.Objects;
 
 namespace NHBaseThrift.BatchInsertTest
 {
@@ -23,16 +24,16 @@ namespace NHBaseThrift.BatchInsertTest
 			try
 			{
 				IHTable table = client.CreateTable(tableName, "cf");
-				Objects.BatchMutation[] rows = new Objects.BatchMutation[rowNum];
+				BatchMutation[] rows = new BatchMutation[rowNum];
 				for (int i = 1; i <= rowNum; i++)
 				{
-					rows[i-1] = new Objects.BatchMutation
+					rows[i-1] = new BatchMutation
 					{
 						RowKey = TypeConversionHelper.StringToByteArray(i.ToString()),
 						Mutations = new[]
 						{
-							new Objects.Mutation {ColumnName = "cf:col1", Value = TypeConversionHelper.StringToByteArray("value"+i)},
-							new Objects.Mutation {ColumnName = "cf:col2", Value = TypeConversionHelper.StringToByteArray(hugeData+i)}
+							new Mutation {ColumnName = "cf:col1", Value = TypeConversionHelper.StringToByteArray("value"+i)},
+							new Mutation {ColumnName = "cf:col2", Value = TypeConversionHelper.StringToByteArray(hugeData+i)}
 						}
 					};
 				}

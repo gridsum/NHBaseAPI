@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using Gridsum.NHBaseThrift.Analyzing;
+using Gridsum.NHBaseThrift.Engine;
+using Gridsum.NHBaseThrift.Exceptions;
 using KJFramework.Tracing;
-using NHBaseThrift.Analyzing;
-using NHBaseThrift.Engine;
-using NHBaseThrift.Exceptions;
 
-namespace NHBaseThrift.Contracts
+namespace Gridsum.NHBaseThrift.Contracts
 {
     /// <summary>
     ///     Each of sub Thrift object SHOULD derives from this class.

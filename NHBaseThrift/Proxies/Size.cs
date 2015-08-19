@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NHBaseThrift.Proxies
+namespace Gridsum.NHBaseThrift.Proxies
 {
     /// <summary>
     ///     内部用来保存每一个数据类型大小的容器

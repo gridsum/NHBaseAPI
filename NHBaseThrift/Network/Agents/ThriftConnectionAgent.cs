@@ -1,6 +1,8 @@
 using System;
 using System.Net;
 using System.Threading;
+using Gridsum.NHBaseThrift.Messages;
+using Gridsum.NHBaseThrift.Network.Transactions;
 using KJFramework.EventArgs;
 using KJFramework.Net.Channels;
 using KJFramework.Net.ProtocolStacks;
@@ -8,10 +10,8 @@ using KJFramework.Net.Transaction;
 using KJFramework.Net.Transaction.Helpers;
 using KJFramework.Net.Transaction.Identities;
 using KJFramework.Tracing;
-using NHBaseThrift.Messages;
-using NHBaseThrift.Network.Transactions;
 
-namespace NHBaseThrift.Network.Agents
+namespace Gridsum.NHBaseThrift.Network.Agents
 {
     /// <summary>
     ///     客户端连接代理器，提供了相关的基本操作

@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Objects
+﻿namespace Gridsum.NHBaseThrift.Objects
 {
     /// <summary>
     ///    新数据列信息对象

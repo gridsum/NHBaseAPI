@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Exceptions
+﻿namespace Gridsum.NHBaseThrift.Exceptions
 {
     /// <summary>
     ///     网络数据内部计算出错异常

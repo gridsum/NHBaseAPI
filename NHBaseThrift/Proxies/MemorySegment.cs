@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using KJFramework.Core.Native;
 
-namespace NHBaseThrift.Proxies
+namespace Gridsum.NHBaseThrift.Proxies
 {
     /// <summary>
     ///     ÄÚ´æÆ¬¶Î

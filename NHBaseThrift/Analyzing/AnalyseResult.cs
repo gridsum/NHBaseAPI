@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
-using NHBaseThrift.Attributes;
-using NHBaseThrift.Stubs;
+using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Stubs;
 
-namespace NHBaseThrift.Analyzing
+namespace Gridsum.NHBaseThrift.Analyzing
 {
     /// <summary>
     ///     只能类型分析结果，提供了相关的基本操作。

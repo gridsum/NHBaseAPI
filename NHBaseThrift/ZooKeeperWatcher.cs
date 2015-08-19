@@ -1,7 +1,7 @@
 ﻿using System;
 using ZooKeeperNet;
 
-namespace NHBaseThrift
+namespace Gridsum.NHBaseThrift
 {
     /// <summary>
     ///    ZooKeeper所使用的通知观察器

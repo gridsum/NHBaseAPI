@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Gridsum.NHBaseThrift.Messages;
 using KJFramework.Net.ProtocolStacks;
-using NHBaseThrift.Messages;
 
-namespace NHBaseThrift.Network
+namespace Gridsum.NHBaseThrift.Network
 {
     /// <summary>
     ///    基于Thrift协议的协议栈

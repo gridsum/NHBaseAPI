@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using NHBaseThrift.Attributes;
-using NHBaseThrift.Enums;
-using NHBaseThrift.Objects;
+using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Objects;
 
-namespace NHBaseThrift.Messages
+namespace Gridsum.NHBaseThrift.Messages
 {
     /// <summary>
     ///     Request mesasge for inserting a new row into specified HBase table.

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 
-namespace NHBaseThrift
+namespace Gridsum.NHBaseThrift
 {
     /// <summary>
     ///     HOST名称映射管理器

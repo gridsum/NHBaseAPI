@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Exceptions
+﻿namespace Gridsum.NHBaseThrift.Exceptions
 {
     /// <summary>
     ///     Thrift协议栈解析消息时报出的位置对象类型异常

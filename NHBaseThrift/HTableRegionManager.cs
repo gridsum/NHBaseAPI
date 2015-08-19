@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using NHBaseThrift.Comparator;
-using NHBaseThrift.Exceptions;
-using NHBaseThrift.Objects;
+using Gridsum.NHBaseThrift.Comparator;
+using Gridsum.NHBaseThrift.Exceptions;
+using Gridsum.NHBaseThrift.Objects;
 
-namespace NHBaseThrift
+namespace Gridsum.NHBaseThrift
 {
     /// <summary>
     ///     HBase表区域分布管理器

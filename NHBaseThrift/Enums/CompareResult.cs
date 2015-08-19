@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Enums
+﻿namespace Gridsum.NHBaseThrift.Enums
 {
 	/// <summary>
 	///		比较结果

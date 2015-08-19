@@ -1,13 +1,13 @@
 using System.Text;
-using NHBaseThrift.Analyzing;
-using NHBaseThrift.Attributes;
-using NHBaseThrift.Enums;
-using NHBaseThrift.Helpers;
-using NHBaseThrift.Network;
-using NHBaseThrift.Objects;
-using NHBaseThrift.Proxies;
+using Gridsum.NHBaseThrift.Analyzing;
+using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Helpers;
+using Gridsum.NHBaseThrift.Network;
+using Gridsum.NHBaseThrift.Objects;
+using Gridsum.NHBaseThrift.Proxies;
 
-namespace NHBaseThrift.TypeProcessors
+namespace Gridsum.NHBaseThrift.TypeProcessors
 {
     /// <summary>
     ///     Thrift网络消息唯一标识类型处理器，提供了相关的基本操作

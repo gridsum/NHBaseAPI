@@ -1,11 +1,11 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
-using NHBaseThrift.Attributes;
-using NHBaseThrift.Proxies;
-using NHBaseThrift.Stubs;
+using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Proxies;
+using Gridsum.NHBaseThrift.Stubs;
 
-namespace NHBaseThrift.Analyzing
+namespace Gridsum.NHBaseThrift.Analyzing
 {
     /// <summary>
     ///     可转化为元数据的分析结果，提供了相关的基本操作。

@@ -1,9 +1,9 @@
-﻿using NHBaseThrift.Attributes;
-using NHBaseThrift.Contracts;
-using NHBaseThrift.Enums;
-using NHBaseThrift.Objects;
+﻿using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Contracts;
+using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Objects;
 
-namespace NHBaseThrift.Messages
+namespace Gridsum.NHBaseThrift.Messages
 {
     /// <summary>
     ///     Thrift network communication message.

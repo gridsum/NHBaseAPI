@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Stubs
+﻿namespace Gridsum.NHBaseThrift.Stubs
 {
     /// <summary>
     ///     固定字节类型的基础支持

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using Gridsum.NHBaseThrift.Messages;
+using Gridsum.NHBaseThrift.Network.Agents;
 using KJFramework.Cache.Exception;
 using KJFramework.Net.Channels.Extends;
 using KJFramework.Net.ProtocolStacks;
 using KJFramework.Tracing;
-using NHBaseThrift.Messages;
-using NHBaseThrift.Network.Agents;
 
-namespace NHBaseThrift.Network
+namespace Gridsum.NHBaseThrift.Network
 {
     /// <summary>
     ///     连接池

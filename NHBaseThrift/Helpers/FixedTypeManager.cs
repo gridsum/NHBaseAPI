@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using NHBaseThrift.Stubs;
+using Gridsum.NHBaseThrift.Stubs;
 
-namespace NHBaseThrift.Helpers
+namespace Gridsum.NHBaseThrift.Helpers
 {
     /// <summary>
     ///     固定类型管理器，为固定字节数序列化/反序列化的能力提供基础支持

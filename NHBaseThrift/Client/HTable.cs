@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using Gridsum.NHBaseThrift.Comparator;
+using Gridsum.NHBaseThrift.Exceptions;
+using Gridsum.NHBaseThrift.Objects;
 using KJFramework.Tracing;
-using NHBaseThrift.Comparator;
-using NHBaseThrift.Exceptions;
-using NHBaseThrift.Objects;
 
-namespace NHBaseThrift.Client
+namespace Gridsum.NHBaseThrift.Client
 {
     /// <summary>
     ///    HBase表

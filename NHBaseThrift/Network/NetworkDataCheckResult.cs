@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Network
+﻿namespace Gridsum.NHBaseThrift.Network
 {
     /// <summary>
     ///    网络数据内部检查结果

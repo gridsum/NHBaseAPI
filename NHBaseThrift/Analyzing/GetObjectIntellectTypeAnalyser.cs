@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Gridsum.NHBaseThrift.Attributes;
 using KJFramework.Helpers;
-using NHBaseThrift.Attributes;
 
-namespace NHBaseThrift.Analyzing
+namespace Gridsum.NHBaseThrift.Analyzing
 {
     /// <summary>
     ///     可转换为对象的智能类型分析器，提供了相关的基本操作。

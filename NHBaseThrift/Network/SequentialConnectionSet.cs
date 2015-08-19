@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Net;
+using Gridsum.NHBaseThrift.Messages;
+using Gridsum.NHBaseThrift.Network.Agents;
 using KJFramework.Net.ProtocolStacks;
-using NHBaseThrift.Messages;
-using NHBaseThrift.Network.Agents;
 
-namespace NHBaseThrift.Network
+namespace Gridsum.NHBaseThrift.Network
 {
     /// <summary>
     ///    支持顺序算法的连接容器

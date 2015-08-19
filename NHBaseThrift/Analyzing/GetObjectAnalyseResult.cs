@@ -1,12 +1,12 @@
 using System;
 using System.Reflection;
 using System.Text;
-using NHBaseThrift.Enums;
-using NHBaseThrift.Helpers;
-using NHBaseThrift.Network;
-using NHBaseThrift.Stubs;
+using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Helpers;
+using Gridsum.NHBaseThrift.Network;
+using Gridsum.NHBaseThrift.Stubs;
 
-namespace NHBaseThrift.Analyzing
+namespace Gridsum.NHBaseThrift.Analyzing
 {    
     /// <summary>
     ///     ×Ö·û´®×ª»»Ô¼ÊøÎ¯ÍÐ

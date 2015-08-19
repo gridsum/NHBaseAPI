@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift
+﻿namespace Gridsum.NHBaseThrift
 {
     internal class Consts
     {

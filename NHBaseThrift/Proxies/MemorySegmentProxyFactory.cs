@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Proxies
+﻿namespace Gridsum.NHBaseThrift.Proxies
 {
     /// <summary>
     ///     内存段代理器工厂

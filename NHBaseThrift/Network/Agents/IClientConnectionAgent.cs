@@ -1,11 +1,11 @@
 ﻿using System;
+using Gridsum.NHBaseThrift.Messages;
+using Gridsum.NHBaseThrift.Network.Transactions;
 using KJFramework.EventArgs;
 using KJFramework.Net.Channels;
 using KJFramework.Net.Transaction;
-using NHBaseThrift.Messages;
-using NHBaseThrift.Network.Transactions;
 
-namespace NHBaseThrift.Network.Agents
+namespace Gridsum.NHBaseThrift.Network.Agents
 {
     /// <summary>
     ///     客户端代理器元接口

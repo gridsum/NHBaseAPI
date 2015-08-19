@@ -1,8 +1,8 @@
 ﻿using System.Net;
-using NHBaseThrift.Comparator;
-using NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Comparator;
+using Gridsum.NHBaseThrift.Enums;
 
-namespace NHBaseThrift
+namespace Gridsum.NHBaseThrift
 {
     /// <summary>
     ///     业务对象，用于存储远程Region服务器信息

@@ -1,11 +1,11 @@
-using NHBaseThrift.Analyzing;
-using NHBaseThrift.Attributes;
-using NHBaseThrift.Enums;
-using NHBaseThrift.Helpers;
-using NHBaseThrift.Network;
-using NHBaseThrift.Proxies;
+using Gridsum.NHBaseThrift.Analyzing;
+using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Helpers;
+using Gridsum.NHBaseThrift.Network;
+using Gridsum.NHBaseThrift.Proxies;
 
-namespace NHBaseThrift.TypeProcessors
+namespace Gridsum.NHBaseThrift.TypeProcessors
 {
     /// <summary>
     ///     bool类型Thrift协议字段处理器，提供了相关的基本操作

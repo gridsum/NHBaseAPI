@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace NHBaseThrift
+namespace Gridsum.NHBaseThrift
 {
     /// <summary>
     ///    内部全局变量

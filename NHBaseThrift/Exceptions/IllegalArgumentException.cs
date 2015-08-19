@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NHBaseThrift.Exceptions
+namespace Gridsum.NHBaseThrift.Exceptions
 {
 	/// <summary>
 	///		An IllegalArgument exception indicates an illegal or invalid argument was passed into a procedure. 

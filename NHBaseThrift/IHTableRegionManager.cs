@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace NHBaseThrift
+namespace Gridsum.NHBaseThrift
 {
     /// <summary>
     ///     HBase表区域分布管理器接口

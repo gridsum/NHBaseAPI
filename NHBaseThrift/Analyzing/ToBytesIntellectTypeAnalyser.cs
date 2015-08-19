@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Contracts;
+using Gridsum.NHBaseThrift.Exceptions;
 using KJFramework.Helpers;
-using NHBaseThrift.Attributes;
-using NHBaseThrift.Contracts;
-using NHBaseThrift.Exceptions;
 
-namespace NHBaseThrift.Analyzing
+namespace Gridsum.NHBaseThrift.Analyzing
 {
     /// <summary>
     ///     可转换为元数据的Thrift协议类型分析器，提供了相关的基本操作。

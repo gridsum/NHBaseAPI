@@ -1,10 +1,9 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
+using Gridsum.NHBaseThrift.Exceptions;
+using Gridsum.NHBaseThrift.Objects;
 using KJFramework.Tracing;
-using NHBaseThrift.Exceptions;
-using NHBaseThrift.Objects;
 
-namespace NHBaseThrift.Client
+namespace Gridsum.NHBaseThrift.Client
 {
 	/// <summary>
 	///		Scanner查询器

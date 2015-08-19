@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NHBaseThrift.Network.Agents
+namespace Gridsum.NHBaseThrift.Network.Agents
 {
     /// <summary>
     ///     连接代理器，提供了相关的基本操作

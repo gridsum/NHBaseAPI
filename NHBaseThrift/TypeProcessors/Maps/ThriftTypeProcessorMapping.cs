@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Enums;
 using KJFramework.Tracing;
-using NHBaseThrift.Attributes;
-using NHBaseThrift.Enums;
 
-namespace NHBaseThrift.TypeProcessors.Maps
+namespace Gridsum.NHBaseThrift.TypeProcessors.Maps
 {
     /// <summary>
     ///     Thrift协议类型处理器映射表，提供了相关的基本操作。

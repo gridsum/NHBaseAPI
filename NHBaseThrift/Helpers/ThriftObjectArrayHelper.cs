@@ -2,9 +2,9 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 using System.Reflection.Emit;
-using NHBaseThrift.Contracts;
+using Gridsum.NHBaseThrift.Contracts;
 
-namespace NHBaseThrift.Helpers
+namespace Gridsum.NHBaseThrift.Helpers
 {
     /// <summary>
     ///     智能类型数组帮助器

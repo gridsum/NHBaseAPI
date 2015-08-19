@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Enums
+﻿namespace Gridsum.NHBaseThrift.Enums
 {
     /// <summary>
     ///     Message operation types in Thrift protocol.

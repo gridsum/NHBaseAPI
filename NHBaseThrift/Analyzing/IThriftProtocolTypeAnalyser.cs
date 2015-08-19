@@ -1,4 +1,4 @@
-namespace NHBaseThrift.Analyzing
+namespace Gridsum.NHBaseThrift.Analyzing
 {
     /// <summary>
     ///     Thrift协议类型分析器元接口，提供了相关的基本操作。

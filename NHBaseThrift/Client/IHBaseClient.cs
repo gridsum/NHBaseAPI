@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using NHBaseThrift.Exceptions;
-using NHBaseThrift.Objects;
+using Gridsum.NHBaseThrift.Exceptions;
+using Gridsum.NHBaseThrift.Objects;
 
-namespace NHBaseThrift.Client
+namespace Gridsum.NHBaseThrift.Client
 {
     /// <summary>
     ///    HBase客户端

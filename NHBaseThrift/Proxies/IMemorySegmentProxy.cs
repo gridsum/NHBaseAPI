@@ -1,8 +1,7 @@
 using System;
 using System.Net;
-using KJFramework.Messages.Types;
 
-namespace NHBaseThrift.Proxies
+namespace Gridsum.NHBaseThrift.Proxies
 {
     /// <summary>
     ///     ÄÚ´æÆ¬¶Î´úÀíÆ÷

@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Analyzing
+﻿namespace Gridsum.NHBaseThrift.Analyzing
 {
     /// <summary>
     ///     序列化分析结果集

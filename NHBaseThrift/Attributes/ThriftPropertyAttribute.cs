@@ -1,6 +1,6 @@
-﻿using NHBaseThrift.Enums;
+﻿using Gridsum.NHBaseThrift.Enums;
 
-namespace NHBaseThrift.Attributes
+namespace Gridsum.NHBaseThrift.Attributes
 {
     /// <summary>
     ///     Thrift Protocol Member's Attribute

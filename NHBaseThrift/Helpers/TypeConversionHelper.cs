@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Text;
-using NHBaseThrift.Helpers;
 
-namespace NHBaseThrift
+namespace Gridsum.NHBaseThrift.Helpers
 {
 	/// <summary>
 	///		类型转换帮助类

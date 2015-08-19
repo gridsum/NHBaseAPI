@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using KJFramework.Tracing;
 
-namespace NHBaseThrift.Proxies
+namespace Gridsum.NHBaseThrift.Proxies
 {
     /// <summary>
     ///     内存申请器

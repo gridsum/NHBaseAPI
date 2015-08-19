@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Net;
 using System.Timers;
+using Gridsum.NHBaseThrift.Messages;
 using KJFramework.EventArgs;
 using KJFramework.Net.Channels;
 using KJFramework.Net.Transaction;
@@ -10,10 +11,9 @@ using KJFramework.Net.Transaction.Comparers;
 using KJFramework.Net.Transaction.Helpers;
 using KJFramework.Net.Transaction.Identities;
 using KJFramework.Tracing;
-using NHBaseThrift.Messages;
 using Timer = System.Timers.Timer;
 
-namespace NHBaseThrift.Network.Transactions
+namespace Gridsum.NHBaseThrift.Network.Transactions
 {
     /// <summary>
     ///     消息事务管理器，提供了相关的基本操作

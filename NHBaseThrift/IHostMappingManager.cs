@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift
+﻿namespace Gridsum.NHBaseThrift
 {
     /// <summary>
     ///     HOST名称映射管理器接口

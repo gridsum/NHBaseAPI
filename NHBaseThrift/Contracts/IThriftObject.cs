@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Contracts
+﻿namespace Gridsum.NHBaseThrift.Contracts
 {
     /// <summary>
     ///     Thrift object interface

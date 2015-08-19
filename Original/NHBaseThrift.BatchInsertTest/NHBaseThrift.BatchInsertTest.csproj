@@ -55,9 +55,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\NHBaseThrift\NHBaseThrift.csproj">
+    <ProjectReference Include="..\..\NHBaseThrift\Gridsum.NHBaseThrift.csproj">
       <Project>{bcd9ff49-d6e8-4c64-825c-a39414bb27f9}</Project>
-      <Name>NHBaseThrift</Name>
+      <Name>Gridsum.NHBaseThrift</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

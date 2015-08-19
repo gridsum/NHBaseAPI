@@ -1,10 +1,10 @@
 ﻿using System.Net;
+using Gridsum.NHBaseThrift.Messages;
+using Gridsum.NHBaseThrift.Network.Agents;
+using Gridsum.NHBaseThrift.Network.Transactions;
 using KJFramework.Net.ProtocolStacks;
-using NHBaseThrift.Messages;
-using NHBaseThrift.Network.Agents;
-using NHBaseThrift.Network.Transactions;
 
-namespace NHBaseThrift.Network
+namespace Gridsum.NHBaseThrift.Network
 {
     /// <summary>
     ///     系统连接池，仅供系统内部使用

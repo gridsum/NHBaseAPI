@@ -1,8 +1,8 @@
-﻿using NHBaseThrift.Attributes;
-using NHBaseThrift.Contracts;
-using NHBaseThrift.Enums;
+﻿using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Contracts;
+using Gridsum.NHBaseThrift.Enums;
 
-namespace NHBaseThrift.Objects
+namespace Gridsum.NHBaseThrift.Objects
 {
     /// <summary>
     ///     Column Descriptor

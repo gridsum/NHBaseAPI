@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace NHBaseThrift.Proxies
+namespace Gridsum.NHBaseThrift.Proxies
 {
     /// <summary>
     ///     内存位置基础结构

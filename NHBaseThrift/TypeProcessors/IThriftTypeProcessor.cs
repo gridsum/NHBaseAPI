@@ -1,11 +1,11 @@
 ﻿using System;
-using NHBaseThrift.Analyzing;
-using NHBaseThrift.Attributes;
-using NHBaseThrift.Enums;
-using NHBaseThrift.Network;
-using NHBaseThrift.Proxies;
+using Gridsum.NHBaseThrift.Analyzing;
+using Gridsum.NHBaseThrift.Attributes;
+using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Network;
+using Gridsum.NHBaseThrift.Proxies;
 
-namespace NHBaseThrift.TypeProcessors
+namespace Gridsum.NHBaseThrift.TypeProcessors
 {
     /// <summary>
     ///    Thrift协议中所使用类型的处理器

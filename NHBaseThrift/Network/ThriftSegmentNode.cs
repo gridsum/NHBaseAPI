@@ -1,7 +1,7 @@
 ﻿using KJFramework.Net.Channels.Events;
 using KJFramework.Net.Channels.Objects;
 
-namespace NHBaseThrift.Network
+namespace Gridsum.NHBaseThrift.Network
 {
     /// <summary>
     ///     Thrift网络协议内部所使用的内存片段

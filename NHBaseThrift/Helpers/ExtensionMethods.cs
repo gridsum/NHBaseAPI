@@ -1,4 +1,4 @@
-﻿namespace NHBaseThrift.Helpers
+﻿namespace Gridsum.NHBaseThrift.Helpers
 {
     /// <summary>
     ///    类型扩展方法

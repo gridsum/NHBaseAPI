@@ -1,4 +1,4 @@
-namespace NHBaseThrift.Analyzing
+namespace Gridsum.NHBaseThrift.Analyzing
 {
     internal static class Analyser
     {
