@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{14BC02A5-882E-4F39-94E1-E99DF92BDFD5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gridsum.NHBase.UnitTests</RootNamespace>
+    <AssemblyName>Gridsum.NHBase.UnitTests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Basic">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Basic.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Cache">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Data.Synchronization">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Data.Synchronization.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Dynamic">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.IO">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Messages">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Messages.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Net">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Net.Channels">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Net.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Net.Cloud">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Net.Cloud.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Net.Transaction">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Net.Transaction.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Platform.Deploy.CSN.Common">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Platform.Deploy.CSN.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Platform.Deploy.CSN.NetworkLayer">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Platform.Deploy.CSN.NetworkLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Platform.Deploy.CSN.ProtocolStack">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Platform.Deploy.CSN.ProtocolStack.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Platform.Deploy.Metadata">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Platform.Deploy.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.ServiceModel">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.ServiceModel.Bussiness.Default">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.ServiceModel.Bussiness.Default.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.ServiceModel.Core">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.ServiceModel.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="KJFramework.Test.LoadRunner">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\KJFramework.Test.LoadRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="mysql.data">
+      <HintPath>..\..\packages\KJFramework.1.0.7\lib\net40\mysql.data.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Messages\ScannerOpenWithScanTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TMemoryStreamTransport.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\NHBaseThrift\Gridsum.NHBaseThrift.csproj">
+      <Project>{bcd9ff49-d6e8-4c64-825c-a39414bb27f9}</Project>
+      <Name>Gridsum.NHBaseThrift</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Original\IThrift\IThrift.csproj">
+      <Project>{cc1ebc28-692e-4652-a794-af07439edeb4}</Project>
+      <Name>IThrift</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Original\Thrift\Thrift.csproj">
+      <Project>{499eb63c-d74c-47e8-ae48-a2fc94538e9d}</Project>
+      <Name>Thrift</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

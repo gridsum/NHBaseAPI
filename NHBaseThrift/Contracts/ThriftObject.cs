@@ -326,6 +326,11 @@ namespace Gridsum.NHBaseThrift.Contracts
             return stringBuilder.ToString();
         }
 
+	    public void SetOptional(Type t)
+	    {
+		    
+	    }
+
         #endregion
     }
 }

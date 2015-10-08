@@ -199,6 +199,8 @@
     <Compile Include="Messages\ScannerGetListResponseMessage.cs" />
     <Compile Include="Messages\ScannerGetRequestMessage.cs" />
     <Compile Include="Messages\ScannerGetResponseMessage.cs" />
+    <Compile Include="Messages\ScannerOpenWithScanRequestMessage.cs" />
+    <Compile Include="Messages\ScannerOpenWithScanResponseMessage.cs" />
     <Compile Include="Messages\ScannerOpenWithStopRequestMessage.cs" />
     <Compile Include="Messages\ScannerOpenWithStopResponseMessage.cs" />
     <Compile Include="Network\Agents\ThriftConnectionAgent.cs" />
@@ -249,6 +251,7 @@
     <Compile Include="Objects\ColumnInfo.cs" />
     <Compile Include="Objects\Region.cs" />
     <Compile Include="Objects\RowInfo.cs" />
+    <Compile Include="Objects\TScan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxies\IMemorySegment.cs" />
     <Compile Include="Proxies\IMemorySegmentProxy.cs" />
@@ -280,6 +283,7 @@
     <Compile Include="TypeProcessors\IThriftTypeProcessor.cs" />
     <Compile Include="TypeProcessors\Maps\ArrayTypeProcessorMapping.cs" />
     <Compile Include="TypeProcessors\Maps\ThriftTypeProcessorMapping.cs" />
+    <Compile Include="TypeProcessors\TScanThriftTypeProcessor.cs" />
     <Compile Include="ZooKeeperWatcher.cs" />
   </ItemGroup>
   <ItemGroup>

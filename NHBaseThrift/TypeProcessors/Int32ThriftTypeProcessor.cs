@@ -37,6 +37,7 @@ namespace Gridsum.NHBaseThrift.TypeProcessors
         /// <param name="isArrayElement">当前写入的值是否为数组元素标示</param>
         public override void Process(IMemorySegmentProxy proxy, ThriftPropertyAttribute attribute, ToBytesAnalyseResult analyseResult, object target, bool isArrayElement = false, bool isNullable = false)
         {
+	        if (!attribute.Optional) return;
             int value = analyseResult.GetValue<int>(target);
             proxy.WriteSByte((sbyte)attribute.PropertyType);
             proxy.WriteInt16(((short)attribute.Id).ToBigEndian());

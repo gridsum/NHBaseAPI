@@ -48,6 +48,7 @@ namespace Gridsum.NHBaseThrift.TypeProcessors.Maps
             Regist(new MessageIdentityTypeProcessor());
             Regist(new MapStringStringThriftTypeProcessor());
             Regist(new MapStringCellThriftTypeProcessor());
+			Regist(new TScanThriftTypeProcessor());
         }
 
         /// <summary>

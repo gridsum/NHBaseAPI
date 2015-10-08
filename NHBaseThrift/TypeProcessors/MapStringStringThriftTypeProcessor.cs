@@ -9,11 +9,11 @@ using Gridsum.NHBaseThrift.Proxies;
 
 namespace Gridsum.NHBaseThrift.TypeProcessors
 {
+	/// <summary>
+	///     Dictionary(string, string)类型Thrift协议字段处理器，提供了相关的基本操作
+	/// </summary>
     public class MapStringStringThriftTypeProcessor : ThriftTypeProcessor
     {
-        /// <summary>
-        ///     Dictionary(string, string)类型Thrift协议字段处理器，提供了相关的基本操作
-        /// </summary>
         #region Constructor.
 
         /// <summary>

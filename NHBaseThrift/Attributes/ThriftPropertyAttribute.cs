@@ -9,13 +9,14 @@ namespace Gridsum.NHBaseThrift.Attributes
     {
         #region Constructor.
 
-        /// <summary>
-        ///     Thrift Protocol Member's Attribute
-        /// </summary>
-        /// <param name="id">Property ID</param>
-        /// <param name="propertyType">Property Type</param>
-        /// <param name="needWriteOverheads">A flag indicated that whether applies Thrift's TField binary format while serializing.</param>
-        public ThriftPropertyAttribute(short id, PropertyTypes propertyType, bool needWriteOverheads = true)
+	    /// <summary>
+	    ///     Thrift Protocol Member's Attribute
+	    /// </summary>
+	    /// <param name="id">Property ID</param>
+	    /// <param name="propertyType">Property Type</param>
+	    /// <param name="needWriteOverheads">A flag indicated that whether applies Thrift's TField binary format while serializing.</param>
+		/// <param name="optional">A value indicated that whether this value is required</param>
+	    public ThriftPropertyAttribute(short id, PropertyTypes propertyType, bool needWriteOverheads = true)
         {
             _propertyType = propertyType;
             _id = id;
