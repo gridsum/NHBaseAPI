@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using Gridsum.NHBaseThrift.Helpers;
@@ -28,6 +27,7 @@ namespace Gridsum.NHBase.UnitTests.Messages
 		}
 
 		[Test]
+		[Description("Basic field Serialize Test")]
 		public void SerializeTest()
 		{
 			ScannerOpenWithScanRequestMessage req = new ScannerOpenWithScanRequestMessage();
@@ -35,10 +35,59 @@ namespace Gridsum.NHBase.UnitTests.Messages
 			string tableName = "TableName1";
 			string startRow = "row0";
 			string stopRow = "row100";
-			long timeStamp = 111;
 			string[] Columns ={ "cf:col" };
+			string filterString = "SingleColumnValueFilter('cf','col1',=,'substring:value1')";
+
+			req.TableName = tableName;
+			NHBaseThrift.Objects.TScan scan = new NHBaseThrift.Objects.TScan();
+			scan.StartRow = TypeConversionHelper.StringToByteArray(startRow);
+			scan.StopRow = TypeConversionHelper.StringToByteArray(stopRow);
+			scan.Columns = Columns;
+			scan.FilterString = filterString;
+
+			req.Scan = scan;
+			req.Bind();
+			Assert.IsTrue(req.IsBind);
+			Assert.IsNotNull(req.Body);
+
+			TMemoryStreamTransport stream = new TMemoryStreamTransport();
+			Hbase.Client client = new Hbase.Client(new TBinaryProtocol(stream));
+			TScan scanOrigion = new TScan();
+			scanOrigion.StartRow = TypeConversionHelper.StringToByteArray(startRow);
+			scanOrigion.StopRow = TypeConversionHelper.StringToByteArray(stopRow);
+			scanOrigion.Columns = new List<byte[]>
+			{
+				TypeConversionHelper.StringToByteArray("cf:col")
+			};
+			scanOrigion.FilterString = TypeConversionHelper.StringToByteArray(filterString);
+
+			client.send_scannerOpenWithScan(Encoding.UTF8.GetBytes(req.TableName),
+				scanOrigion, null);
+			byte[] originalData = stream.GetBuffer();
+
+			Assert.AreEqual(originalData.Length, req.Body.Length);
+			for (int i = 0; i < originalData.Length; i++)
+			{
+				bool result = originalData[i] == req.Body[i];
+				if (!result) Console.WriteLine("Different index: " + i);
+				Assert.IsTrue(result);
+			}
+		}
+
+
+		[Test]
+		[Description("All field Serialize Test")]
+		public void SerializeAllFieldTest()
+		{
+			ScannerOpenWithScanRequestMessage req = new ScannerOpenWithScanRequestMessage();
+
+			string tableName = "TableName1";
+			string startRow = "row0";
+			string stopRow = "row100";
+			long timeStamp = 111;
+			string[] Columns = { "cf:col" };
 			int caching = 222;
-			string filterString = "filter";
+			string filterString = "SingleColumnValueFilter('cf','col1',=,'substring:value1')";
 			int batchSize = 333;
 			bool sortColumns = false;
 			bool reversed = false;
@@ -47,11 +96,11 @@ namespace Gridsum.NHBase.UnitTests.Messages
 			NHBaseThrift.Objects.TScan scan = new NHBaseThrift.Objects.TScan();
 			scan.StartRow = TypeConversionHelper.StringToByteArray(startRow);
 			scan.StopRow = TypeConversionHelper.StringToByteArray(stopRow);
-			//scan.Timestamp = timeStamp;
 			scan.Columns = Columns;
+			scan.TimeStamp = timeStamp;
 			scan.Caching = caching;
 			scan.FilterString = filterString;
-			//scan.BatchSize = batchSize;
+			scan.BatchSize = batchSize;
 			scan.SortColumns = sortColumns;
 			scan.Reversed = reversed;
 			req.Scan = scan;
@@ -64,36 +113,22 @@ namespace Gridsum.NHBase.UnitTests.Messages
 			TScan scanOrigion = new TScan();
 			scanOrigion.StartRow = TypeConversionHelper.StringToByteArray(startRow);
 			scanOrigion.StopRow = TypeConversionHelper.StringToByteArray(stopRow);
-			//scanOrigion.Timestamp = timeStamp;
 			scanOrigion.Columns = new List<byte[]>
 			{
 				TypeConversionHelper.StringToByteArray("cf:col")
 			};
-			scanOrigion.Caching = caching;
 			scanOrigion.FilterString = TypeConversionHelper.StringToByteArray(filterString);
-			//scanOrigion.BatchSize = batchSize;
+
+			scanOrigion.Timestamp = timeStamp;
+			scanOrigion.Caching = caching;
+			scanOrigion.BatchSize = batchSize;
 			scanOrigion.SortColumns = sortColumns;
 			scanOrigion.Reversed = reversed;
+
 			client.send_scannerOpenWithScan(Encoding.UTF8.GetBytes(req.TableName),
 				scanOrigion, null);
 			byte[] originalData = stream.GetBuffer();
 
-			foreach (byte b in originalData)
-			{
-				Console.Write("{0}\n", b);
-			}
-			Console.WriteLine("===");
-			foreach (byte b in req.Body)
-			{
-				Console.Write("{0}\n",b);
-			}
-
-			for (int i = 0; i < originalData.Length; i++)
-			{
-				bool result = originalData[i] == req.Body[i];
-				if (!result) Console.WriteLine("Different index: " + i);
-				Assert.IsTrue(result);
-			}
 			Assert.AreEqual(originalData.Length, req.Body.Length);
 			for (int i = 0; i < originalData.Length; i++)
 			{
@@ -102,6 +137,8 @@ namespace Gridsum.NHBase.UnitTests.Messages
 				Assert.IsTrue(result);
 			}
 		}
+
+
 
 		private void SetMemorySegment(SocketBuffStub stub, MemorySegment segment)
 		{

@@ -381,7 +381,7 @@ namespace Gridsum.NHBaseThrift.Client
         ///  <exception cref="IllegalArgumentException">参数错误</exception>
         ///  <exception cref="CommunicationTimeoutException">通信超时</exception>
         ///  <exception cref="CommunicationFailException">通信失败</exception>
-        ///  <returns></returns>
+        ///  <returns>是否插入成功</returns>
         internal bool InsertRow(string tableName, byte[] rowkey, IPEndPoint iep, Mutation[] mutations, Dictionary<string,string> attributes=null)
 		{
 			if (string.IsNullOrEmpty(tableName)) throw new ArgumentNullException("tableName");
@@ -719,6 +719,54 @@ namespace Gridsum.NHBaseThrift.Client
 				autoResetEvent.Set();
 			};
 			ScannerOpenWithStopRequestMessage reqMsg = new ScannerOpenWithStopRequestMessage { TableName = tableName, StartRow = startKey, EndRow = endKey, Columns = columns, Attribute = attribute};
+			transaction.SendRequest(reqMsg);
+			autoResetEvent.WaitOne();
+			if (ex != null) throw ex;
+			return result;
+		}
+
+
+	    ///  <summary>
+	    /// 		按rowkey上下限获取scannerId
+	    ///  </summary>
+	    ///  <param name="tableName">表名</param>
+		///  <param name="scan">A Scan object is used to specify scanner parameters</param>
+	    ///  <param name="iep">对应的Region的服务器地址</param>
+	    ///  <param name="columns">指定获取的列名</param>
+	    ///  <param name="attribute">attribute</param>
+	    ///  <exception cref="IOErrorException">IO错误</exception>
+	    ///  <exception cref="ArgumentNullException">参数不能为空</exception>
+	    ///  <exception cref="CommunicationTimeoutException">通信超时</exception>
+	    ///  <exception cref="CommunicationFailException">通信失败</exception>
+	    ///  <returns>scannerId</returns>
+	    internal int GetScannerOpenWithScan(string tableName, TScan scan, IPEndPoint iep, Dictionary<string, string> attribute = null)
+		{
+			if (string.IsNullOrEmpty(tableName)) throw new ArgumentNullException("tableName");
+			if (scan == null) throw new ArgumentNullException("TScan");
+			IThriftConnectionAgent agent = _connectionPool.GetChannel(iep, "RegionServer", _protocolStack, _transactionManager);
+			if (agent == null) throw new NoConnectionException();
+			Exception ex = null;
+			int result = -1;
+			ThriftMessageTransaction transaction = agent.CreateTransaction();
+			AutoResetEvent autoResetEvent = new AutoResetEvent(false);
+			transaction.ResponseArrived += delegate(object sender, LightSingleArgEventArgs<ThriftMessage> e)
+			{
+				ScannerOpenWithScanResponseMessage rspMsg = (ScannerOpenWithScanResponseMessage)e.Target;
+				if (rspMsg.IOErrorMessage != null) ex = new IOErrorException(rspMsg.IOErrorMessage.Reason);
+				result = rspMsg.ScannerId;
+				autoResetEvent.Set();
+			};
+			transaction.Timeout += delegate
+			{
+				ex = new CommunicationTimeoutException(transaction.SequenceId);
+				autoResetEvent.Set();
+			};
+			transaction.Failed += delegate
+			{
+				ex = new CommunicationFailException(transaction.SequenceId);
+				autoResetEvent.Set();
+			};
+			ScannerOpenWithScanRequestMessage reqMsg = new ScannerOpenWithScanRequestMessage { TableName = tableName, Scan = scan, Attribute = attribute };
 			transaction.SendRequest(reqMsg);
 			autoResetEvent.WaitOne();
 			if (ex != null) throw ex;

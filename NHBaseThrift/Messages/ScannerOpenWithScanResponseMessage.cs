@@ -7,7 +7,7 @@ namespace Gridsum.NHBaseThrift.Messages
 	/// <summary>
 	///		Response corresponding scanner ID to the ScannerOpenWithScan request
 	/// </summary>
-	class ScannerOpenWithScanResponseMessage : ThriftMessage
+	public class ScannerOpenWithScanResponseMessage : ThriftMessage
 	{
 		#region Constructor.
 

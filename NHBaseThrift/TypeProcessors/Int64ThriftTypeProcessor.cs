@@ -1,6 +1,7 @@
 using Gridsum.NHBaseThrift.Analyzing;
 using Gridsum.NHBaseThrift.Attributes;
 using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Exceptions;
 using Gridsum.NHBaseThrift.Helpers;
 using Gridsum.NHBaseThrift.Network;
 using Gridsum.NHBaseThrift.Proxies;
@@ -27,18 +28,32 @@ namespace Gridsum.NHBaseThrift.TypeProcessors
 
         #region Overrides of IntellectTypeProcessor
 
-        /// <summary>
-        ///     从第三方客户数据转换为元数据
-        /// </summary>
-        /// <param name="proxy">内存片段代理器</param>
-        /// <param name="attribute">字段属性</param>
-        /// <param name="analyseResult">分析结果</param>
-        /// <param name="target">目标对象实例</param>
-        /// <param name="isArrayElement">当前写入的值是否为数组元素标示</param>
-        public override void Process(IMemorySegmentProxy proxy, ThriftPropertyAttribute attribute, ToBytesAnalyseResult analyseResult, object target, bool isArrayElement = false, bool isNullable = false)
+	    /// <summary>
+	    ///     从第三方客户数据转换为元数据
+	    /// </summary>
+	    /// <param name="proxy">内存片段代理器</param>
+	    /// <param name="attribute">字段属性</param>
+	    /// <param name="analyseResult">分析结果</param>
+	    /// <param name="target">目标对象实例</param>
+	    /// <param name="isArrayElement">当前写入的值是否为数组元素标示</param>
+	    /// <param name="isNullable">元数据类型是否可空</param>
+	    public override void Process(IMemorySegmentProxy proxy, ThriftPropertyAttribute attribute, ToBytesAnalyseResult analyseResult, object target, bool isArrayElement = false, bool isNullable = false)
         {
-	        if (!attribute.Optional) return;
-            long value = analyseResult.GetValue<long>(target);
+	        long value;
+	        if (!isNullable) value = analyseResult.GetValue<long>(target);
+	        else
+	        {
+				long? nullableValue = analyseResult.GetValue<long?>(target);
+				if (nullableValue == null)
+				{
+					if (!attribute.Optional) return;
+					throw new PropertyNullValueException(
+						string.Format(ExceptionMessage.EX_PROPERTY_VALUE, attribute.Id,
+										analyseResult.Property.Name,
+										analyseResult.Property.PropertyType));
+				}
+				value = (long)nullableValue;
+	        }
             proxy.WriteSByte((sbyte)attribute.PropertyType);
             proxy.WriteInt16(((short)attribute.Id).ToBigEndian());
             proxy.WriteInt64(value.ToBigEndian());

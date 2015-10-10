@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Gridsum.NHBaseThrift.Attributes;
+﻿using Gridsum.NHBaseThrift.Attributes;
 using Gridsum.NHBaseThrift.Contracts;
 using Gridsum.NHBaseThrift.Enums;
 
@@ -11,34 +10,6 @@ namespace Gridsum.NHBaseThrift.Objects
 	public class TScan : ThriftObject
 	{
 		#region Members.
-
-		private byte[] _startRow;
-		private byte[] _stopRow;
-		private long _timestamp;
-		private List<byte[]> _columns;
-		private int _caching;
-		private byte[] _filterString;
-		private int _batchSize;
-		private bool _sortColumns;
-		private bool _reversed;
-
-		public Isset __isset;
-
-		/// <summary>
-		///		The set include whether the field is set
-		/// </summary>
-		public struct Isset
-		{
-			public bool startRow;
-			public bool stopRow;
-			public bool timestamp;
-			public bool columns;
-			public bool caching;
-			public bool filterString;
-			public bool batchSize;
-			public bool sortColumns;
-			public bool reversed;
-		}
 
 		/// <summary>
 		///     Get or set start row
@@ -56,15 +27,7 @@ namespace Gridsum.NHBaseThrift.Objects
 		///     Get or set timeStamp
 		/// </summary>
 		[ThriftProperty(3, PropertyTypes.I64)]
-		public long TimeStamp
-		{
-			get { return _timestamp; }
-			set
-			{
-				__isset.timestamp = true;
-				_timestamp = value;
-			}
-		}
+		public long? TimeStamp { get; set; }
 
 		/// <summary>
 		///		Get or set columns
@@ -76,31 +39,31 @@ namespace Gridsum.NHBaseThrift.Objects
 		///		Get or set caching
 		/// </summary>
 		[ThriftProperty(5, PropertyTypes.I32)]
-		public int Caching { get; set; }
+		public int? Caching { get; set; }
 
 		/// <summary>
-		///		Get or set filterString
+		///		Get or set filter string
 		/// </summary>
 		[ThriftProperty(6, PropertyTypes.String)]
 		public string FilterString { get; set; }
 
 		/// <summary>
-		///		Get or set filterString
+		///		Get or set batch size
 		/// </summary>
 		[ThriftProperty(7, PropertyTypes.I32)]
-		public int BatchSize { get; set; }
+		public int? BatchSize { get; set; }
 
 		/// <summary>
 		///		Get or set sortColumns
 		/// </summary>
 		[ThriftProperty(8, PropertyTypes.Bool)]
-		public bool SortColumns { get; set; }
+		public bool? SortColumns { get; set; }
 
 		/// <summary>
 		///		Get or set reversed
 		/// </summary>
 		[ThriftProperty(9, PropertyTypes.Bool)]
-		public bool Reversed { get; set; }
+		public bool? Reversed { get; set; }
 
 		#endregion
 	}

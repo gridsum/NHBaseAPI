@@ -16,14 +16,15 @@ namespace NHBaseThrift.BatchInsertTest
 		{
 			//new MemoryFailPoint(10);
 			IHBaseClient client = new HBaseClient("zk=10.200.200.56:2181,10.200.200.57:2181,10.200.200.58:2181;zkTimeout=00:05:00;memSegSize=1048576;memSegMultiples=1000");
-			string tableName = string.Format("mediad_test_thrift_table_test_{0}", DateTime.Now.Second);
+			//string tableName = string.Format("mediad_test_thrift_table_test_{0}", DateTime.Now.Second);
+			string tableName = string.Format("mediad_test_thrift_table_test_{0}", 0);
 			string hugeData = new string('a', bytesNum);
 			Stopwatch sw = new Stopwatch();
-			Stopwatch sw2 = new Stopwatch();
 			Console.WriteLine(((rowNum * Encoding.UTF8.GetBytes(hugeData).Length).ToString()));
 			try
 			{
-				IHTable table = client.CreateTable(tableName, "cf");
+				//IHTable table = client.CreateTable(tableName, "cf");
+				IHTable table = client.GetTable(tableName);
 				BatchMutation[] rows = new BatchMutation[rowNum];
 				for (int i = 1; i <= rowNum; i++)
 				{
@@ -58,30 +59,58 @@ namespace NHBaseThrift.BatchInsertTest
 
 				Console.WriteLine("GetRows batchSize:{1} 1~{0}:", rowNum, batchSize);
 				Scanner scanner = table.NewScanner(new byte[]{0}, new byte[]{0xff, 0xff, 0xff}, new List<string> {"cf:col1", "cf:col2"});
-
-				Dictionary<string, string> tmpDictionary = new Dictionary<string, string>();
+				Dictionary<string, Dictionary<string, string>> tmpDictionary = new Dictionary<string, Dictionary<string, string>>();
 				sw.Restart();
 				RowInfo info;
+				
+				/*
+				 * Scan Test
+				 */
 				while ((info = scanner.GetNext()) != null)
 				{
 					//Console.WriteLine("read row {0}", info.RowKey);
+					tmpDictionary[info.RowKey] = new Dictionary<string, string>();
 					foreach (KeyValuePair<string, Cell> pair in info.Columns)
 					{
-						tmpDictionary[info.RowKey] = TypeConversionHelper.ByteArraryToString(pair.Value.Value);
-						//if (pair.Key.Equals("cf:col1")) Assert.AreEqual("value"+counter, pair.Value.Value);
-						//else if(pair.Key.Equals("cf:col2")) Assert.AreEqual(hugeData+counter, pair.Value.Value);
+						Dictionary<string, string> colDictionary;
+						if(!tmpDictionary.TryGetValue(info.RowKey, out colDictionary)) colDictionary = new Dictionary<string, string>();
+						colDictionary[pair.Key] = TypeConversionHelper.ByteArraryToString(pair.Value.Value);
 					}
 				}
+				scanner.Dispose();
 				Console.WriteLine(sw.ElapsedTicks / (decimal)Stopwatch.Frequency);
 				if (rowNum != tmpDictionary.Keys.Count) Console.WriteLine("rowNum != tmpDictionary.Keys.Count");
 				for (int i = 1; i <= rowNum; i++)
 				{
-					if (!(hugeData + i).Equals(tmpDictionary[i.ToString()]))
+					if (!(hugeData + i).Equals(tmpDictionary[i.ToString()]["cf:col2"]))
 					{
 						Console.WriteLine("content not eqal!");
 						return;
 					}
 				}
+
+				/*
+				 * filter Test
+				 */
+				TScan scan = new TScan()
+				{
+					StartRow = new byte[] { 0 },
+					StopRow = new byte[] { 0xff },
+					FilterString = "RowFilter(=, 'regexstring:1')",
+				};
+				Scanner scanner2 = table.NewScanner(scan);
+				tmpDictionary = new Dictionary<string, Dictionary<string, string>>();
+				while ((info = scanner2.GetNext()) != null)
+				{
+					tmpDictionary[info.RowKey] = new Dictionary<string, string>();
+					foreach (KeyValuePair<string, Cell> pair in info.Columns)
+					{
+						Dictionary<string, string> colDictionary;
+						if (!tmpDictionary.TryGetValue(info.RowKey, out colDictionary)) colDictionary = new Dictionary<string, string>();
+						colDictionary[pair.Key] = TypeConversionHelper.ByteArraryToString(pair.Value.Value);
+					}
+				}
+				scanner2.Dispose();
 			}
 			finally
 			{

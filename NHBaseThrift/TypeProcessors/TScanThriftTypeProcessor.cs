@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
 using Gridsum.NHBaseThrift.Analyzing;
 using Gridsum.NHBaseThrift.Attributes;
 using Gridsum.NHBaseThrift.Enums;
