@@ -16,8 +16,7 @@ namespace NHBaseThrift.BatchInsertTest
 		{
 			//new MemoryFailPoint(10);
 			IHBaseClient client = new HBaseClient("zk=10.200.200.56:2181,10.200.200.57:2181,10.200.200.58:2181;zkTimeout=00:05:00;memSegSize=1048576;memSegMultiples=1000");
-			//string tableName = string.Format("mediad_test_thrift_table_test_{0}", DateTime.Now.Second);
-			string tableName = string.Format("mediad_test_thrift_table_test_{0}", 0);
+			string tableName = string.Format("test_thrift_table_test_{0}", 0);
 			string hugeData = new string('a', bytesNum);
 			Stopwatch sw = new Stopwatch();
 			Console.WriteLine(((rowNum * Encoding.UTF8.GetBytes(hugeData).Length).ToString()));
@@ -96,7 +95,8 @@ namespace NHBaseThrift.BatchInsertTest
 				{
 					StartRow = new byte[] { 0 },
 					StopRow = new byte[] { 0xff },
-					FilterString = "RowFilter(=, 'regexstring:1')",
+					FilterString = "SingleColumnValueFilter('cf','col1',=,'substring:value2')",
+					Columns = new[] { "cf:col1" }
 				};
 				Scanner scanner2 = table.NewScanner(scan);
 				tmpDictionary = new Dictionary<string, Dictionary<string, string>>();
