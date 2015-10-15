@@ -179,7 +179,7 @@ while ((info = scanner.GetNext()) != null)
 {
 	foreach (KeyValuePair<string, Cell> pair in info.Columns)
 	{
-	    //pair中包含了读渠道的数据
+	    //pair中包含了读取到的数据
 	}
 }
 
@@ -190,8 +190,36 @@ while ((info = scanner.GetNext()) != null)
 {
 	foreach (KeyValuePair<string, Cell> pair in info.Columns)
 	{
-	    //pair中包含了读渠道的数据
+	    //pair中包含了读取到的数据
 	}
+}
+```
+
+#### - 通过Filter过滤数据
+```csharp
+TScan scan = new TScan()
+{
+	StartRow = new byte[] {0},
+	StopRow = new byte[] {0xff},
+	FilterString = "SingleColumnValueFilter('cf','column1',=,'regexstring:value[23]4')",
+	//FilterString = "SingleColumnValueFilter('cf','column1',=,'substring:value2')",
+	Columns = new[] {"cf:column1"}
+};
+Scanner scanner = table.NewScanner(scan);
+try
+{
+	while ((info = scanner.GetNext()) != null)
+	{
+		tmpDictionary[info.RowKey] = new Dictionary<string, string>();
+		foreach (KeyValuePair<string, Cell> pair in info.Columns)
+		{
+			 //pair中包含了读取到的数据
+		}
+	}
+}
+catch(Exception ex)
+{
+	scanner.Dispose();
 }
 ```
 
