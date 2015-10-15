@@ -7,8 +7,8 @@
     <ProjectGuid>{14BC02A5-882E-4F39-94E1-E99DF92BDFD5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gridsum.NHBase.UnitTests</RootNamespace>
-    <AssemblyName>Gridsum.NHBase.UnitTests</AssemblyName>
+    <RootNamespace>Gridsum.NHBaseThrift.UnitTests</RootNamespace>
+    <AssemblyName>Gridsum.NHBaseThrift.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -107,7 +108,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuffStub.cs" />
+    <Compile Include="CacheItem.cs" />
+    <Compile Include="CacheStub.cs" />
+    <Compile Include="Messages\AtomicIncrementRequestMessageTest.cs" />
+    <Compile Include="Messages\CreateTableRequestMessageTest.cs" />
+    <Compile Include="Messages\DeleteTableRequestMessageTest.cs" />
+    <Compile Include="Messages\DisableTableRequestMessageTest.cs" />
+    <Compile Include="Messages\EnableTableRequestMessageTest.cs" />
+    <Compile Include="Messages\GetTableRegionsRequestMessageTest.cs" />
+    <Compile Include="Messages\InsertNewRowRequestMessageTest.cs" />
+    <Compile Include="Messages\InsertRowsRequestMessageTest.cs" />
     <Compile Include="Messages\ScannerOpenWithScanTest.cs" />
+    <Compile Include="Messages\ScannerOpenWithStopTest.cs" />
+    <Compile Include="NetworkDataContainerUnitTests.cs" />
+    <Compile Include="Processors\CompareUnitTest.cs" />
+    <Compile Include="Processors\EndPointUnitTest.cs" />
+    <Compile Include="Processors\Int16UnitTests.cs" />
+    <Compile Include="Processors\Int64UnitTests.cs" />
+    <Compile Include="Processors\MapStringCellUnitTests.cs" />
+    <Compile Include="Processors\MapStringStringUnitTests.cs" />
+    <Compile Include="Processors\RegionInfoUnitTest.cs" />
+    <Compile Include="Processors\StringArrayUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TMemoryStreamTransport.cs" />
   </ItemGroup>

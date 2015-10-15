@@ -8,7 +8,7 @@ using Gridsum.NHBaseThrift.Client;
 using Gridsum.NHBaseThrift.Helpers;
 using Gridsum.NHBaseThrift.Objects;
 
-namespace NHBaseThrift.BatchInsertTest
+namespace Gridsum.BatchInsertTest
 {
 	class Program
 	{

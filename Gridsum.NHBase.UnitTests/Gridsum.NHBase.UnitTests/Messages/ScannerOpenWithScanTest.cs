@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using Gridsum.NHBaseThrift.Helpers;
 using Gridsum.NHBaseThrift.Messages;
 using Gridsum.NHBaseThrift.Proxies;
-using KJFramework.Cache.Objects;
+using Gridsum.NHBaseThrift.Helpers;
 using KJFramework.Net.Channels;
 using KJFramework.Net.Channels.Caches;
 using NUnit.Framework;
 using Thrift.Protocol;
+using MemorySegment = KJFramework.Cache.Objects.MemorySegment;
 
-namespace Gridsum.NHBase.UnitTests.Messages
+namespace Gridsum.NHBaseThrift.UnitTests.Messages
 {
 	[TestFixture]
 	class ScannerOpenWithScanTest
@@ -137,8 +137,6 @@ namespace Gridsum.NHBase.UnitTests.Messages
 				Assert.IsTrue(result);
 			}
 		}
-
-
 
 		private void SetMemorySegment(SocketBuffStub stub, MemorySegment segment)
 		{

@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C0FC8A
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gridsum.NHBase.UnitTests", "Gridsum.NHBase.UnitTests\Gridsum.NHBase.UnitTests\Gridsum.NHBase.UnitTests.csproj", "{14BC02A5-882E-4F39-94E1-E99DF92BDFD5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gridsum.NHBaseThrift.UnitTests", "Gridsum.NHBase.UnitTests\Gridsum.NHBase.UnitTests\Gridsum.NHBaseThrift.UnitTests.csproj", "{14BC02A5-882E-4F39-94E1-E99DF92BDFD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
