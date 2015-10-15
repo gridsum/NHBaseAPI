@@ -22,18 +22,18 @@ namespace NHBaseThrift.BatchInsertTest
 			Console.WriteLine(((rowNum * Encoding.UTF8.GetBytes(hugeData).Length).ToString()));
 			try
 			{
-				//IHTable table = client.CreateTable(tableName, "cf");
-				IHTable table = client.GetTable(tableName);
+				IHTable table = client.CreateTable(tableName, "cf");
+				//IHTable table = client.GetTable(tableName);
 				BatchMutation[] rows = new BatchMutation[rowNum];
 				for (int i = 1; i <= rowNum; i++)
 				{
-					rows[i-1] = new BatchMutation
+					rows[i - 1] = new BatchMutation
 					{
 						RowKey = TypeConversionHelper.StringToByteArray(i.ToString()),
 						Mutations = new[]
 						{
-							new Mutation {ColumnName = "cf:col1", Value = TypeConversionHelper.StringToByteArray("value"+i)},
-							new Mutation {ColumnName = "cf:col2", Value = TypeConversionHelper.StringToByteArray(hugeData+i)}
+							new Mutation {ColumnName = "cf:col1", Value = TypeConversionHelper.StringToByteArray("value" + i)},
+							new Mutation {ColumnName = "cf:col2", Value = TypeConversionHelper.StringToByteArray(hugeData + i)}
 						}
 					};
 				}
@@ -47,7 +47,7 @@ namespace NHBaseThrift.BatchInsertTest
 						swthread.Restart();
 						Console.WriteLine(table.BatchInsert(out exceptionBatchMutations, rows));
 						swthread.Stop();
-						Console.WriteLine((swthread.ElapsedTicks / (decimal)Stopwatch.Frequency));
+						Console.WriteLine((swthread.ElapsedTicks/(decimal) Stopwatch.Frequency));
 					}));
 				}
 				foreach (Thread thread in threads)
@@ -57,11 +57,12 @@ namespace NHBaseThrift.BatchInsertTest
 				Console.WriteLine("=End=");
 
 				Console.WriteLine("GetRows batchSize:{1} 1~{0}:", rowNum, batchSize);
-				Scanner scanner = table.NewScanner(new byte[]{0}, new byte[]{0xff, 0xff, 0xff}, new List<string> {"cf:col1", "cf:col2"});
+				Scanner scanner = table.NewScanner(new byte[] {0}, new byte[] {0xff, 0xff, 0xff},
+					new List<string> {"cf:col1", "cf:col2"});
 				Dictionary<string, Dictionary<string, string>> tmpDictionary = new Dictionary<string, Dictionary<string, string>>();
 				sw.Restart();
 				RowInfo info;
-				
+
 				/*
 				 * Scan Test
 				 */
@@ -72,12 +73,12 @@ namespace NHBaseThrift.BatchInsertTest
 					foreach (KeyValuePair<string, Cell> pair in info.Columns)
 					{
 						Dictionary<string, string> colDictionary;
-						if(!tmpDictionary.TryGetValue(info.RowKey, out colDictionary)) colDictionary = new Dictionary<string, string>();
+						if (!tmpDictionary.TryGetValue(info.RowKey, out colDictionary)) colDictionary = new Dictionary<string, string>();
 						colDictionary[pair.Key] = TypeConversionHelper.ByteArraryToString(pair.Value.Value);
 					}
 				}
 				scanner.Dispose();
-				Console.WriteLine(sw.ElapsedTicks / (decimal)Stopwatch.Frequency);
+				Console.WriteLine(sw.ElapsedTicks/(decimal) Stopwatch.Frequency);
 				if (rowNum != tmpDictionary.Keys.Count) Console.WriteLine("rowNum != tmpDictionary.Keys.Count");
 				for (int i = 1; i <= rowNum; i++)
 				{
@@ -93,10 +94,10 @@ namespace NHBaseThrift.BatchInsertTest
 				 */
 				TScan scan = new TScan()
 				{
-					StartRow = new byte[] { 0 },
-					StopRow = new byte[] { 0xff },
-					FilterString = "SingleColumnValueFilter('cf','col1',=,'substring:value2')",
-					Columns = new[] { "cf:col1" }
+					StartRow = new byte[] {0},
+					StopRow = new byte[] {0xff},
+					FilterString = "SingleColumnValueFilter('cf','col1',=,'regexstring:value[23]4')",
+					Columns = new[] {"cf:col1"}
 				};
 				Scanner scanner2 = table.NewScanner(scan);
 				tmpDictionary = new Dictionary<string, Dictionary<string, string>>();
@@ -111,12 +112,41 @@ namespace NHBaseThrift.BatchInsertTest
 					}
 				}
 				scanner2.Dispose();
+				if (tmpDictionary.Keys.Count != 2) Console.WriteLine("regex test error");
+
+				scan = new TScan()
+				{
+					StartRow = new byte[] {0},
+					StopRow = new byte[] {0xff},
+					FilterString = "SingleColumnValueFilter('cf','col1',=,'substring:value2')",
+					Columns = new[] {"cf:col1"}
+				};
+				scanner2 = table.NewScanner(scan);
+				tmpDictionary = new Dictionary<string, Dictionary<string, string>>();
+				while ((info = scanner2.GetNext()) != null)
+				{
+					tmpDictionary[info.RowKey] = new Dictionary<string, string>();
+					foreach (KeyValuePair<string, Cell> pair in info.Columns)
+					{
+						Dictionary<string, string> colDictionary;
+						if (!tmpDictionary.TryGetValue(info.RowKey, out colDictionary)) colDictionary = new Dictionary<string, string>();
+						colDictionary[pair.Key] = TypeConversionHelper.ByteArraryToString(pair.Value.Value);
+					}
+				}
+				scanner2.Dispose();
+				if (tmpDictionary.Keys.Count != 11) Console.WriteLine("substring test error");
+				Console.WriteLine("test success");
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
 			}
 			finally
 			{
 				client.DeleteTable(tableName);
 			}
 		}
+
 		unsafe static void Main(string[] args)
 		{
 			int rowNum = Convert.ToInt32(ConfigurationManager.AppSettings["rowNumber"]);
