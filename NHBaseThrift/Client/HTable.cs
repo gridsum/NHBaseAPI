@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
 using Gridsum.NHBaseThrift.Comparator;
@@ -32,6 +31,7 @@ namespace Gridsum.NHBaseThrift.Client
 
         #region Members.
 
+		private Random _rnd = new Random();
         private readonly HBaseClient _client;
         private IHTableRegionManager _regionManager;
         private static readonly object _lockObj = new object();
@@ -211,7 +211,13 @@ namespace Gridsum.NHBaseThrift.Client
 			if (scan == null) throw new ArgumentNullException("scan");
 		    if (scan.StartRow != null) randomKey = scan.StartRow;
 			else if (scan.StopRow != null) randomKey = scan.StopRow;
-			else randomKey = Encoding.UTF8.GetBytes(DateTime.Now.Millisecond.ToString());
+			// get a random rowkey to share the hbase pressure
+			else
+			{
+				byte[] bytes = new byte[1];
+				_rnd.NextBytes(bytes);
+				randomKey = bytes;
+			}
 			IPEndPoint iep = _regionManager.GetRegionByRowKey(randomKey);
 			int scannerId = _client.GetScannerOpenWithScan(TableName, scan, iep);
 			return new Scanner(scannerId, _client, iep);

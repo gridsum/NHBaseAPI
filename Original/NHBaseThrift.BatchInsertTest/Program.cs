@@ -94,8 +94,8 @@ namespace Gridsum.BatchInsertTest
 				 */
 				TScan scan = new TScan()
 				{
-					StartRow = new byte[] {0},
-					StopRow = new byte[] {0xff},
+					//StartRow = new byte[] {0},
+					//StopRow = new byte[] {0xff},
 					FilterString = "SingleColumnValueFilter('cf','col1',=,'regexstring:value[23]4')",
 					Columns = new[] {"cf:col1"}
 				};
