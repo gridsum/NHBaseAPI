@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Reflection;
 using System.Text;
+using Gridsum.NHBaseThrift.Engine;
+using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Messages;
 using Gridsum.NHBaseThrift.Network;
 using KJFramework.Cache.Cores;
 using KJFramework.Cache.Objects;
@@ -618,6 +621,157 @@ namespace Gridsum.NHBaseThrift.UnitTests
             Assert.IsTrue(container.TryReadByte(out tmpValue));
             Assert.IsTrue(tmpValue == 0xFE);
         }
+
+
+
+		[Test]
+		[Description("多个消息同时存储在一个内存片段上，主要的测试点是在ResetOffset之后是否指针还能够指向第二个消息的正确便宜上")]
+		public void MultiMessageInOneSegmentDeserializeTest()
+		{
+			byte[] data1 = 
+            {
+                0x80, 0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x0F,
+                0x61, 0x74, 0x6F, 0x6D, 0x69, 0x63, 0x49, 0x6E,
+                0x63, 0x72, 0x65, 0x6D, 0x65, 0x6E, 0x74, 0x00,
+                0x00, 0x00, 0xCB, 0x0A, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x02, 0x3A, 0x00, 0x80,
+                0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x0A, 0x6D,
+                0x75, 0x74, 0x61, 0x74, 0x65, 0x52, 0x6F, 0x77,
+                0x73, 0x00, 0x00, 0x00, 0xCC, 0x00
+            };
+			byte[] data2 = 
+            {
+                0x80, 0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x0A,
+                0x6D, 0x75, 0x74, 0x61, 0x74, 0x65, 0x52, 0x6F,
+                0x77, 0x73, 0x00, 0x00, 0x00, 0xCD, 0x00
+            };
+
+
+			IFixedCacheStub<SocketBuffStub> fixedStub = new CacheStub<SocketBuffStub>();
+			SocketBuffStub stub = new SocketBuffStub();
+			((ICacheStub<SocketBuffStub>)fixedStub).Cache.SetValue(stub);
+			SetMemorySegment(stub, new MemorySegment(new ArraySegment<byte>(data1, 0, data1.Length)));
+
+
+			IFixedCacheStub<SocketBuffStub> fixedStub2 = new CacheStub<SocketBuffStub>();
+			SocketBuffStub stub2 = new SocketBuffStub();
+			((ICacheStub<SocketBuffStub>)fixedStub2).Cache.SetValue(stub2);
+			SetMemorySegment(stub2, new MemorySegment(new ArraySegment<byte>(data2, 0, data2.Length)));
+
+
+
+
+
+			INetworkDataContainer container = new NetworkDataContainer();
+			container.AppendNetworkData(new SocketSegmentReceiveEventArgs(fixedStub, data1.Length));
+			container.AppendNetworkData(new SocketSegmentReceiveEventArgs(fixedStub2, data2.Length));
+			AtomicIncrementResponseMessage newObj;
+			Assert.IsTrue(ThriftObjectEngine.TryGetObject(container, out newObj) == GetObjectResultTypes.Succeed);
+			Assert.IsNotNull(newObj);
+			container.UpdateOffset();
+			container.ResetOffset();
+		}
+
+	    [Test]
+	    [Description("多个消息同时存储在一个内存片段上，主要的测试点是在ResetOffset之后是否指针还能够指向第二个消息的正确便宜上")]
+		[ExpectedException(typeof(Exception))]
+	    public void MultiMessageInOneSegmentDeserializeTest2()
+	    {
+		    byte[] data1 =
+		    {
+			    0x80, 0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x0F,
+			    0x61, 0x74, 0x6F, 0x6D, 0x69, 0x63, 0x49, 0x6E,
+			    0x63, 0x72, 0x65, 0x6D, 0x65, 0x6E, 0x74, 0x00,
+			    0x00, 0x00, 0xCB, 0x0A, 0x00, 0x00, 0x00, 0x00,
+			    0x00, 0x00, 0x00, 0x00, 0x02, 0x3A, 0x00, 0x80,
+			    0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x0A, 0x6D,
+			    0x75, 0x74, 0x61, 0x74, 0x65, 0x52, 0x6F, 0x77,
+			    0x73, 0x00, 0x00, 0x00, 0xCC, 0x00
+		    };
+		    byte[] data2 =
+		    {
+			    0x80, 0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x0A,
+			    0x6D, 0x75, 0x74, 0x61, 0x74, 0x65, 0x52, 0x6F,
+			    0x77, 0x73, 0x00, 0x00, 0x00, 0xCD, 0x00
+		    };
+
+
+		    IFixedCacheStub<SocketBuffStub> fixedStub = new CacheStub<SocketBuffStub>();
+		    SocketBuffStub stub = new SocketBuffStub();
+		    ((ICacheStub<SocketBuffStub>) fixedStub).Cache.SetValue(stub);
+		    SetMemorySegment(stub, new MemorySegment(new ArraySegment<byte>(data1, 0, data1.Length)));
+
+
+		    IFixedCacheStub<SocketBuffStub> fixedStub2 = new CacheStub<SocketBuffStub>();
+		    SocketBuffStub stub2 = new SocketBuffStub();
+		    ((ICacheStub<SocketBuffStub>) fixedStub2).Cache.SetValue(stub2);
+		    SetMemorySegment(stub2, new MemorySegment(new ArraySegment<byte>(data2, 0, data2.Length)));
+
+		    INetworkDataContainer container = new NetworkDataContainer();
+		    container.AppendNetworkData(new SocketSegmentReceiveEventArgs(fixedStub, data1.Length));
+		    container.AppendNetworkData(new SocketSegmentReceiveEventArgs(fixedStub2, data2.Length));
+		    AtomicIncrementResponseMessage newObj;
+		    Assert.IsTrue(ThriftObjectEngine.TryGetObject(container, out newObj) == GetObjectResultTypes.Succeed);
+		    Assert.IsNotNull(newObj);
+		    container.UpdateOffset();
+		    container.ResetOffset();
+		    InsertNewRowsResponseMessage newObj2;
+		    Assert.IsTrue(ThriftObjectEngine.TryGetObject(container, out newObj2) == GetObjectResultTypes.Succeed);
+		    Assert.IsNotNull(newObj2);
+		    container.UpdateOffset();
+		    container.ResetOffset();
+		    Assert.IsTrue(ThriftObjectEngine.TryGetObject(container, out newObj2) == GetObjectResultTypes.Succeed);
+		    Assert.IsNotNull(newObj2);
+		    container.UpdateOffset();
+		    container.ResetOffset();
+	    }
+
+	    [Test]
+		[Description("正好一个完整的消息同时存储在一个内存片段上，主要的测试点是在UpdateOffset和ResetOffset的组合操作后是否偏移能置为0，并且当前的内存片段指向第二个片段的开始位置")]
+		[ExpectedException(typeof(Exception))]
+		public void EntireOneMessageInOneSegmentDeserializeTest()
+		{
+			byte[] data1 = 
+            {
+                0x80, 0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x0F,
+                0x61, 0x74, 0x6F, 0x6D, 0x69, 0x63, 0x49, 0x6E,
+                0x63, 0x72, 0x65, 0x6D, 0x65, 0x6E, 0x74, 0x00,
+                0x00, 0x00, 0xCB, 0x0A, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x02, 0x3A, 0x00
+            };
+			byte[] data2 = 
+            {
+                0x80, 0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x0A,
+                0x6D, 0x75, 0x74, 0x61, 0x74, 0x65, 0x52, 0x6F,
+                0x77, 0x73, 0x00, 0x00, 0x00, 0xCD, 0x00
+            };
+
+
+			IFixedCacheStub<SocketBuffStub> fixedStub = new CacheStub<SocketBuffStub>();
+			SocketBuffStub stub = new SocketBuffStub();
+			((ICacheStub<SocketBuffStub>)fixedStub).Cache.SetValue(stub);
+			SetMemorySegment(stub, new MemorySegment(new ArraySegment<byte>(data1, 0, data1.Length)));
+
+
+			IFixedCacheStub<SocketBuffStub> fixedStub2 = new CacheStub<SocketBuffStub>();
+			SocketBuffStub stub2 = new SocketBuffStub();
+			((ICacheStub<SocketBuffStub>)fixedStub2).Cache.SetValue(stub2);
+			SetMemorySegment(stub2, new MemorySegment(new ArraySegment<byte>(data2, 0, data2.Length)));
+
+			INetworkDataContainer container = new NetworkDataContainer();
+			container.AppendNetworkData(new SocketSegmentReceiveEventArgs(fixedStub, data1.Length));
+			container.AppendNetworkData(new SocketSegmentReceiveEventArgs(fixedStub2, data2.Length));
+			AtomicIncrementResponseMessage newObj;
+			Assert.IsTrue(ThriftObjectEngine.TryGetObject(container, out newObj) == GetObjectResultTypes.Succeed);
+			Assert.IsNotNull(newObj);
+			container.UpdateOffset();
+			container.ResetOffset();
+			InsertNewRowsResponseMessage newObj2;
+			Assert.IsTrue(ThriftObjectEngine.TryGetObject(container, out newObj2) == GetObjectResultTypes.Succeed);
+			Assert.IsNotNull(newObj2);
+			container.UpdateOffset();
+			container.ResetOffset();
+		}
 
 
         [Test]

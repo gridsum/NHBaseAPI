@@ -39,8 +39,6 @@ namespace Gridsum.NHBaseThrift.UnitTests.Processors
 			ThriftProtocolMemoryAllotter.InitializeEnvironment(256, 100000);
 		}
 
-		[Test]
-		[Ignore]
 		public byte[] SerializeTest()
 		{
 			Int64Test1 obj = new Int64Test1 { Id1 = 17, Identity = new MessageIdentity { Command = "test", CommandLength = 4U, SequenceId = 1, Version = 3 } };

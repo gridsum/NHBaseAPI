@@ -40,8 +40,6 @@ namespace Gridsum.NHBaseThrift.UnitTests.Processors
 			ThriftProtocolMemoryAllotter.InitializeEnvironment(256, 100000);
         }
 
-        [Test]
-		[Ignore]
         public byte[] SerializeTest()
         {
             MapStringStringTest1 obj = new MapStringStringTest1 { Id1 = new Dictionary<string, string>{{"k","v"}}, Identity = new MessageIdentity { Command = "test", CommandLength = 4U, SequenceId = 1, Version = 3 } };
