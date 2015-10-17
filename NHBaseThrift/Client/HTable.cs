@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using Gridsum.NHBaseThrift.Comparator;
+using System.Threading;
 using Gridsum.NHBaseThrift.Exceptions;
 using Gridsum.NHBaseThrift.Objects;
 using KJFramework.Tracing;
@@ -9,32 +9,39 @@ using KJFramework.Tracing;
 namespace Gridsum.NHBaseThrift.Client
 {
     /// <summary>
-    ///    HBase表
+    ///    HBase Table
     /// </summary>
     internal class HTable : IHTable
     {
         #region Constructor.
 
         /// <summary>
-        ///    HBase表
+        ///		HBase Table
         /// </summary>
-		public HTable(string tableName, HBaseClient client, IHostMappingManager hostMappingManager)
+        /// <param name="tableName">tableName</param>
+        /// <param name="client">client</param>
+		/// <param name="hostMappingManager">hostMappingManager</param>
+		/// <param name="updateRegionsTimeSpan">The updateRegionsTimeSpan is the Operating time interval which continue to update the regions by a independent thread</param>
+		public HTable(string tableName, HBaseClient client, IHostMappingManager hostMappingManager, double updateRegionsTimeSpan = 10)
         {
             _client = client;
             _hostMappingManager = hostMappingManager;
             TableName = tableName;
+	        _updateRegionsTimeSpan = TimeSpan.FromSeconds(updateRegionsTimeSpan);
             EnsureHTableRegions();
+	        AutoUpdateTableRegions();
         }
 
         #endregion
 
         #region Members.
 
-        private readonly HBaseClient _client;
-        private IHTableRegionManager _regionManager;
+		private Thread _thread;
+		private readonly HBaseClient _client;
+		private TimeSpan _updateRegionsTimeSpan;
+		private IHTableRegionManager _regionManager;
         private static readonly object _lockObj = new object();
         private readonly IHostMappingManager _hostMappingManager;
-	    private readonly IByteArrayComparator _byteArrayComparator;
 	    private static readonly ITracing _tracing = TracingManager.GetTracing(typeof (HTable));
         private static readonly IDictionary<string, IHTableRegionManager> _regions = new Dictionary<string, IHTableRegionManager>(); 
 
@@ -56,6 +63,7 @@ namespace Gridsum.NHBaseThrift.Client
 		/// <exception cref="CommunicationFailException">通信失败</exception>
         public void Enable()
         {
+			throw new NotImplementedException();
         }
 
         /// <summary>
@@ -114,7 +122,9 @@ namespace Gridsum.NHBaseThrift.Client
 			return infos[0];
         }
 
-        //Ensures how many distributed table regions it has.
+        /// <summary>
+		///		Ensures how many distributed table regions it has.
+        /// </summary>
         private void EnsureHTableRegions()
         {
             lock (_lockObj)
@@ -126,6 +136,23 @@ namespace Gridsum.NHBaseThrift.Client
                 }
             }
         }
+
+		/// <summary>
+		///		The updateRegionsTimeSpan is the Operating time interval which continue to update the regions by a independent thread
+		/// </summary>
+	    private void AutoUpdateTableRegions()
+	    {
+			_thread = new Thread(
+				delegate()
+				{
+					while (true)
+					{
+						Thread.Sleep(_updateRegionsTimeSpan);
+						EnsureHTableRegions();
+					}
+				}) { Name = "Table_REGION_UPDATING_THREAD", IsBackground = true };
+			_thread.Start();
+	    }
 
 	    /// <summary>
 	    ///    批量插入行操作

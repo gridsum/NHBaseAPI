@@ -56,6 +56,7 @@ namespace Gridsum.NHBaseThrift
 
         /// <summary>
         ///     根据一个指定的行键来确定远程Region服务器地址
+		///		Ensures IP address about the server which rowkey belongs to it. 
         /// </summary>
         /// <param name="rowKey">行键</param>
         /// <returns>返回对应的Region服务器地址</returns>
