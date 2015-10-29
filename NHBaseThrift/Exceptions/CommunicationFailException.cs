@@ -13,7 +13,7 @@ namespace Gridsum.NHBaseThrift.Exceptions
 		///     通信失败异常
 		/// </summary>
 		public CommunicationFailException(int seqId)
-			: base(String.Format("#Transation SEQ ID: {0} had timeout.", seqId))
+			: base(String.Format("#Transation SEQ ID: {0} Communication Failed.", seqId))
 		{
 
 		}
