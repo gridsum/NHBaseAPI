@@ -16,7 +16,7 @@ namespace Gridsum.NHBaseThrift.Objects
         ///    获取或设置行键
         /// </summary>
 		[ThriftProperty(1, PropertyTypes.String)]
-        public string RowKey { get; set; }
+        public byte[] RowKey { get; set; }
         /// <summary>
         ///    获取或设置列信息
         /// </summary>
