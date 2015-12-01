@@ -2,6 +2,6 @@
 {
     internal class Consts
     {
-        public const string ThriftObjectFullName = "NHBaseThrift.Contracts.IThriftObject";
+        public const string ThriftObjectFullName = "Gridsum.NHBaseThrift.Contracts.IThriftObject";
     }
 }

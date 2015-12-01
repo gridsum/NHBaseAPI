@@ -67,9 +67,7 @@ namespace NHBaseThrift.BatchInsertTest
 					//Console.WriteLine("read row {0}", info.RowKey);
 					foreach (KeyValuePair<string, Cell> pair in info.Columns)
 					{
-						tmpDictionary[info.RowKey] = TypeConversionHelper.ByteArraryToString(pair.Value.Value);
-						//if (pair.Key.Equals("cf:col1")) Assert.AreEqual("value"+counter, pair.Value.Value);
-						//else if(pair.Key.Equals("cf:col2")) Assert.AreEqual(hugeData+counter, pair.Value.Value);
+
 					}
 				}
 				Console.WriteLine(sw.ElapsedTicks / (decimal)Stopwatch.Frequency);
