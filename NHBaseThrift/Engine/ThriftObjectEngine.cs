@@ -160,9 +160,9 @@ namespace Gridsum.NHBaseThrift.Engine
 
                 #endregion
 
-                #region 数组的判断
+				#region 数组的判断
 
-                if (property.Property.PropertyType.IsArray)
+				if (property.Property.PropertyType.IsArray)
                 {
                     if (!property.Property.PropertyType.HasElementType)
                         throw new NotSupportedException(string.Format(ExceptionMessage.EX_NOT_SUPPORTED_VALUE, property.Attribute.Id, property.Property.Name, property.Property.PropertyType));
@@ -243,7 +243,7 @@ namespace Gridsum.NHBaseThrift.Engine
 
                 #endregion
 
-                throw new NotSupportedException(string.Format(ExceptionMessage.EX_NOT_SUPPORTED_VALUE, property.Attribute.Id, property.Property.Name, property.Property.PropertyType));
+				throw new NotSupportedException(string.Format(ExceptionMessage.EX_NOT_SUPPORTED_VALUE, property.Attribute.Id, property.Property.Name, property.Property.PropertyType));
             }
         }
 

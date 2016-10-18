@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Gridsum.NHBaseThrift.Exceptions;
 using Gridsum.NHBaseThrift.Objects;
 
@@ -59,15 +60,26 @@ namespace Gridsum.NHBaseThrift.Client
 		/// <returns>全部成功插入返回true，其它返回false</returns>
 	    bool BatchInsert(out BatchMutation[] exceptionMutations, params BatchMutation[] batchMutation);
 		/// <summary>
-		///    获取一个具有指定键值的数据行
+		///    Get the specified columns
 		/// </summary>
-		/// <param name="rowKey">行键</param>
-		/// <exception cref="IOErrorException">IO错误</exception>
-		/// <exception cref="ArgumentNullException">参数不能为空</exception>
-		/// <exception cref="CommunicationTimeoutException">通信超时</exception>
-		/// <exception cref="CommunicationFailException">通信失败</exception>
-		/// <returns>返回符合指定条件的行数据。若未查找到指定数据则返回null</returns>
+		/// <param name="rowKey">rowkey</param>
+		/// <exception cref="IOErrorException"></exception>
+		/// <exception cref="ArgumentNullException"></exception>
+		/// <exception cref="CommunicationTimeoutException"></exception>
+		/// <exception cref="CommunicationFailException"></exception>
+		/// <returns></returns>
         RowInfo GetRow(byte[] rowKey);
+	    /// <summary>
+	    ///    Get the specified columns
+	    /// </summary>
+	    /// <param name="rowKey">rowkey</param>
+	    /// <param name="columns">columns</param>
+	    /// <exception cref="IOErrorException"></exception>
+	    /// <exception cref="ArgumentNullException"></exception>
+	    /// <exception cref="CommunicationTimeoutException"></exception>
+	    /// <exception cref="CommunicationFailException"></exception>
+	    /// <returns></returns>
+	    RowInfo GetRow(byte[] rowKey, List<string> columns);
 		/// <summary>
 		///	   原子计数器递增
 		/// </summary>

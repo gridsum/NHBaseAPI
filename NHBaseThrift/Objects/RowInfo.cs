@@ -6,7 +6,7 @@ using Gridsum.NHBaseThrift.Enums;
 namespace Gridsum.NHBaseThrift.Objects
 {
     /// <summary>
-    ///    HBase数据行信息
+    ///    Row info
     /// </summary>
     public class RowInfo : ThriftObject
     {

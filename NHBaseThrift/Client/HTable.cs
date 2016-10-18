@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Text;
 using Gridsum.NHBaseThrift.Comparator;
 using Gridsum.NHBaseThrift.Exceptions;
 using Gridsum.NHBaseThrift.Objects;
@@ -96,15 +98,15 @@ namespace Gridsum.NHBaseThrift.Client
             _client.InsertRow(TableName, rowKey, iep, mutations);
         }
 
-        /// <summary>
-        ///    获取一个具有指定键值的数据行
-        /// </summary>
-        /// <param name="rowKey">行键</param>
-		/// <exception cref="IOErrorException">IO错误</exception>
-		/// <exception cref="ArgumentNullException">参数不能为空</exception>
-		/// <exception cref="CommunicationTimeoutException">通信超时</exception>
-		/// <exception cref="CommunicationFailException">通信失败</exception>
-        /// <returns>返回符合指定条件的行数据</returns>
+		/// <summary>
+		///    Get the specified columns
+		/// </summary>
+		/// <param name="rowKey">rowkey</param>
+		/// <exception cref="IOErrorException"></exception>
+		/// <exception cref="ArgumentNullException"></exception>
+		/// <exception cref="CommunicationTimeoutException"></exception>
+		/// <exception cref="CommunicationFailException"></exception>
+		/// <returns></returns>
         public RowInfo GetRow(byte[] rowKey)
         {
 			if (rowKey == null || rowKey.Length == 0) throw new ArgumentNullException("rowKey");
@@ -113,6 +115,26 @@ namespace Gridsum.NHBaseThrift.Client
 	        if (infos == null || infos.Length == 0) return null;
 			return infos[0];
         }
+
+	    /// <summary>
+		///    Get the specified columns
+	    /// </summary>
+	    /// <param name="rowKey">rowkey</param>
+		/// <param name="columns">columns</param>
+	    /// <exception cref="IOErrorException"></exception>
+	    /// <exception cref="ArgumentNullException"></exception>
+	    /// <exception cref="CommunicationTimeoutException"></exception>
+	    /// <exception cref="CommunicationFailException"></exception>
+	    /// <returns></returns>
+		public RowInfo GetRow(byte[] rowKey, List<string> columns)
+		{
+			if (rowKey == null || rowKey.Length == 0) throw new ArgumentNullException("rowKey");
+		    if (columns == null || columns.Count == 0) return GetRow(rowKey);
+			IPEndPoint iep = _regionManager.GetRegionByRowKey(rowKey);
+			RowInfo[] infos = _client.GetRowWithColumnsFromTable(TableName, rowKey, columns.ToArray(), iep);
+			if (infos == null || infos.Length == 0) return null;
+			return infos[0];
+		}
 
         //Ensures how many distributed table regions it has.
         private void EnsureHTableRegions()
