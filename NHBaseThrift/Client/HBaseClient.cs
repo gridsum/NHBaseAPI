@@ -12,6 +12,7 @@ using Gridsum.NHBaseThrift.Network.Transactions;
 using Gridsum.NHBaseThrift.Objects;
 using Gridsum.NHBaseThrift.Proxies;
 using KJFramework.EventArgs;
+using KJFramework.Messages.ValueStored.DataProcessor;
 using KJFramework.Tracing;
 using ZooKeeperNet;
 
@@ -468,21 +469,22 @@ namespace Gridsum.NHBaseThrift.Client
         }
 
 	    /// <summary>
-	    ///    获取一行数据
+	    ///    Get a single row for the specified table, rowkey, and column at the latest timestamp
 	    /// </summary>
-	    /// <param name="tableName">表名</param>
-	    /// <param name="keyName">键名</param>
-	    /// <param name="iep">对应的Region的服务器地址</param>
-	    /// <param name="columns">列名</param>
-	    /// <exception cref="IOErrorException">IO错误</exception>
-	    /// <exception cref="ArgumentNullException">参数不能为空</exception>
-	    /// <exception cref="CommunicationTimeoutException">通信超时</exception>
-	    /// <exception cref="CommunicationFailException">通信失败</exception>
+	    /// <param name="tableName">table name</param>
+	    /// <param name="rowKey">rowkey</param>
+	    /// <param name="iep">a network endpoint as an IP address and a port number</param>
+	    /// <param name="columns">column name</param>
+	    /// <param name="attributes">attributes</param>
+	    /// <exception cref="IOErrorException"></exception>
+	    /// <exception cref="ArgumentNullException"></exception>
+	    /// <exception cref="CommunicationTimeoutException"></exception>
+	    /// <exception cref="CommunicationFailException"></exception>
 	    /// <returns>查询结果</returns>
-	    internal RowInfo[] GetRowWithColumnsFromTable(string tableName, string keyName, IPEndPoint iep, string[] columns)
+		internal RowInfo[] GetRowWithColumnsFromTable(string tableName, byte[] rowKey, string[] columns, IPEndPoint iep, Dictionary<string, string> attributes = null)
 		{
 			if (string.IsNullOrEmpty(tableName)) throw new ArgumentNullException("tableName");
-			if (string.IsNullOrEmpty(keyName)) throw new ArgumentNullException("keyName");
+			if (rowKey == null || rowKey.Length == 0) throw new ArgumentNullException("rowKey");
 			IThriftConnectionAgent agent = _connectionPool.GetChannel(iep, "RegionServer", _protocolStack, _transactionManager);
 			if (agent == null) throw new NoConnectionException();
 			RowInfo[] result = { };
@@ -506,7 +508,8 @@ namespace Gridsum.NHBaseThrift.Client
 				ex = new CommunicationFailException(transaction.SequenceId);
 				autoResetEvent.Set();
 			};
-			GetRowWithColumnsRequestMessage reqMsg = new GetRowWithColumnsRequestMessage { TableName = tableName, RowKey = keyName, Columns = columns, Attributes = new Dictionary<string, string>() };
+			GetRowWithColumnsRequestMessage reqMsg = new GetRowWithColumnsRequestMessage { TableName = tableName, RowKey = rowKey, Columns = columns, Attributes = new Dictionary<string, string>() };
+		    if (attributes != null) reqMsg.Attributes = attributes;
 			transaction.SendRequest(reqMsg);
 			autoResetEvent.WaitOne();
 			if (ex != null) throw ex;
