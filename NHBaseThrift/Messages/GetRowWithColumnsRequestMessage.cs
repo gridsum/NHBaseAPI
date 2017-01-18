@@ -40,7 +40,7 @@ namespace Gridsum.NHBaseThrift.Messages
 		///     Gets or sets HBase table name you want to create.
 		/// </summary>
 		[ThriftProperty(2, PropertyTypes.String)]
-		public string RowKey { get; set; }
+		public byte[] RowKey { get; set; }
 		/// <summary>
 		///		Gets or sets List of columns to return, null for all columns
 		/// </summary>
