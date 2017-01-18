@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 
 namespace Gridsum.NHBaseThrift
@@ -48,9 +49,10 @@ namespace Gridsum.NHBaseThrift
 
         private void InitializeHostMappingInformation()
         {
-            string workPath = Process.GetCurrentProcess().MainModule.FileName.Substring(0, Process.GetCurrentProcess().MainModule.FileName.LastIndexOf('\\') + 1);
             //FORMAT: HOST IP
-            string[] files = Directory.GetFiles(workPath, "host.mapping");
+			DirectoryInfo directoryInfo = (new FileInfo(Process.GetCurrentProcess().MainModule.FileName)).Directory;
+			if (directoryInfo == null) throw new Exception("HostMapping file path is null");
+			string[] files = directoryInfo.GetFiles("host.mapping").Select(x => x.FullName).ToArray();
             if (files.Length == 0) return;
             if (files.Length > 1) throw new Exception("#Confused by multiple \"host.mapping\" files we've founded.");
             string[] lines = File.ReadAllLines(files[0]);
