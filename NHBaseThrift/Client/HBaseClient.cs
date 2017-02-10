@@ -727,12 +727,11 @@ namespace Gridsum.NHBaseThrift.Client
 
 
 	    ///  <summary>
-	    /// 		按rowkey上下限获取scannerId
+		/// 		自定义TScan获取scannerId。Tscan document：http://hbase.apache.org/book.html#thrift
 	    ///  </summary>
 	    ///  <param name="tableName">表名</param>
 		///  <param name="scan">A Scan object is used to specify scanner parameters</param>
 	    ///  <param name="iep">对应的Region的服务器地址</param>
-	    ///  <param name="columns">指定获取的列名</param>
 	    ///  <param name="attribute">attribute</param>
 	    ///  <exception cref="IOErrorException">IO错误</exception>
 	    ///  <exception cref="ArgumentNullException">参数不能为空</exception>
