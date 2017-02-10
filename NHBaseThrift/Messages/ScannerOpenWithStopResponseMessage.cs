@@ -5,15 +5,15 @@ using Gridsum.NHBaseThrift.Objects;
 namespace Gridsum.NHBaseThrift.Messages
 {
 	/// <summary>
-	///		按照RowKey范围查询数据应答
+	///		Response corresponding scanner ID to the ScannerOpenWithStop request
 	/// </summary>
 	public class ScannerOpenWithStopResponseMessage : ThriftMessage
 	{
 		#region Constructor.
 
-        /// <summary>
-		///     按照RowKey范围查询数据应答
-        /// </summary>
+		/// <summary>
+		///		Response corresponding scanner ID to the ScannerOpenWithStop request
+		/// </summary>
 		public ScannerOpenWithStopResponseMessage()
         {
             uint version = VERSION_1 | (uint)(MessageTypes.Reply);
@@ -29,14 +29,14 @@ namespace Gridsum.NHBaseThrift.Messages
 
         #region Members.
 
-
 		/// <summary>
-		///     获取或设置表名
+		///     Set or get the table name
 		/// </summary>
 		[ThriftProperty(0, PropertyTypes.I32)]
 		public int ScannerId { get; set; }
+
 		/// <summary>
-		///     获取或设置IO错误信息
+		///     Set or get IOError message
 		/// </summary>
 		[ThriftProperty(1, PropertyTypes.String)]
 		public IOError IOErrorMessage { get; set; }

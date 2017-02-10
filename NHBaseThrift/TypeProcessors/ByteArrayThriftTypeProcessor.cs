@@ -40,8 +40,6 @@ namespace Gridsum.NHBaseThrift.TypeProcessors
             byte[] value = analyseResult.GetValue<byte[]>(target);
             proxy.WriteSByte((sbyte)attribute.PropertyType);
             proxy.WriteInt16(attribute.Id.ToBigEndian());
-
-            //proxy.WriteByte((byte)PropertyTypes.String);
             proxy.WriteInt32(value.Length.ToBigEndian());
             proxy.WriteMemory(value, 0, (uint) value.Length);
         }

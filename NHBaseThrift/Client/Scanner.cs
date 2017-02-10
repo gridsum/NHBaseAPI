@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using Gridsum.NHBaseThrift.Exceptions;
 using Gridsum.NHBaseThrift.Objects;
 using KJFramework.Tracing;
@@ -8,10 +9,11 @@ namespace Gridsum.NHBaseThrift.Client
 	/// <summary>
 	///		Scanner查询器
 	/// </summary>
-	public class Scanner
+	public class Scanner : IDisposable
 	{
 		#region Members.
-
+		
+		private bool isDisposed;
 		private readonly int BatchSize;
 		private readonly int _scannerId;
 		private readonly IPEndPoint _iep;
@@ -50,15 +52,31 @@ namespace Gridsum.NHBaseThrift.Client
 		/// <returns>返回下一行数据</returns>
 		public RowInfo GetNext()
 		{
+			if (isDisposed) return null;
 			RowInfo[] infos = _client.GetRowsFromScanner(_scannerId, BatchSize, _iep);
 			if (infos == null || infos.Length == 0)
 			{
 				_client.ScannerClose(_scannerId, _iep);
+				isDisposed = true;
 				return null;
 			}
 			return infos[0];
 		}
 
+		/// <summary>
+		///		回收服务器scanner资源
+		/// </summary>
+		public void Dispose()
+		{
+			if (!isDisposed)
+			{
+				_client.ScannerClose(_scannerId, _iep);
+				isDisposed = true;
+			}
+		}
+
 		#endregion
+
+
 	}
 }

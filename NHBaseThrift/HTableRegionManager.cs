@@ -68,7 +68,7 @@ namespace Gridsum.NHBaseThrift
 			if (_regions.Count == 1 && _regions[0].IsMatch(rowKey)) return _regions[0].Address;
             foreach (RegionInfo region in _regions)
 				if (region.IsMatch(rowKey)) return region.Address;
-            throw new RegionNotFoundException("#We couldn't match any remote region server by given Row-Key: " + rowKey);
+            throw new RegionNotFoundException("#We checked all the region but couldn't match any remote region server by given Row-Key: " + rowKey);
         }
 
         #endregion

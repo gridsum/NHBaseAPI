@@ -32,6 +32,7 @@ namespace Gridsum.NHBaseThrift.Client
 
         #region Members.
 
+		private Random _rnd = new Random();
         private readonly HBaseClient _client;
         private IHTableRegionManager _regionManager;
         private static readonly object _lockObj = new object();
@@ -195,7 +196,7 @@ namespace Gridsum.NHBaseThrift.Client
 		}
 
 	    /// <summary>
-	    ///    获取一段范围的数据行
+	    ///    获取一段范围的数据行的scanner
 	    /// </summary>
 	    /// <param name="startKey">查询起始key值</param>
 	    /// <param name="endKey">查询终止key值</param>
@@ -212,6 +213,34 @@ namespace Gridsum.NHBaseThrift.Client
 			if(columns.Count == 0) throw new ArgumentException("columns are undefined");
 			IPEndPoint iep = _regionManager.GetRegionByRowKey(startKey);
 			int scannerId = _client.GetScannerOpenWithStop(TableName, startKey, endKey, iep, columns.ToArray());
+			return new Scanner(scannerId, _client, iep);
+	    }
+
+	    /// <summary>
+	    ///    获取一段范围的数据行的scanner
+	    /// </summary>
+		/// <param name="scan">A Scan object is used to specify scanner parameters</param>
+	    /// <param name="attribute">attribute</param>
+	    /// <exception cref="IOErrorException">IO错误</exception>
+	    /// <exception cref="ArgumentNullException">参数不能为空</exception>
+	    /// <exception cref="CommunicationTimeoutException">通信超时</exception>
+	    /// <exception cref="CommunicationFailException">通信失败</exception>
+	    /// <returns>Scanner对象</returns>
+	    public Scanner NewScanner(TScan scan, Dictionary<string, string> attribute = null)
+	    {
+		    byte[] randomKey;
+			if (scan == null) throw new ArgumentNullException("scan");
+		    if (scan.StartRow != null) randomKey = scan.StartRow;
+			else if (scan.StopRow != null) randomKey = scan.StopRow;
+			// get a random rowkey to share the hbase pressure
+			else
+			{
+				byte[] bytes = new byte[1];
+				_rnd.NextBytes(bytes);
+				randomKey = bytes;
+			}
+			IPEndPoint iep = _regionManager.GetRegionByRowKey(randomKey);
+			int scannerId = _client.GetScannerOpenWithScan(TableName, scan, iep);
 			return new Scanner(scannerId, _client, iep);
 	    }
 

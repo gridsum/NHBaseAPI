@@ -5,7 +5,7 @@ using Gridsum.NHBaseThrift.Stubs;
 namespace Gridsum.NHBaseThrift.Analyzing
 {
     /// <summary>
-    ///     只能类型分析结果，提供了相关的基本操作。
+    ///     智能类型分析结果，提供了相关的基本操作。
     /// </summary>
     public class AnalyseResult : IAnalyseResult
     {

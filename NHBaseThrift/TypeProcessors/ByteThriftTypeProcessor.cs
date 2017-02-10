@@ -1,6 +1,7 @@
 using Gridsum.NHBaseThrift.Analyzing;
 using Gridsum.NHBaseThrift.Attributes;
 using Gridsum.NHBaseThrift.Enums;
+using Gridsum.NHBaseThrift.Exceptions;
 using Gridsum.NHBaseThrift.Helpers;
 using Gridsum.NHBaseThrift.Network;
 using Gridsum.NHBaseThrift.Proxies;
@@ -37,7 +38,21 @@ namespace Gridsum.NHBaseThrift.TypeProcessors
         /// <param name="isArrayElement">当前写入的值是否为数组元素标示</param>
         public override void Process(IMemorySegmentProxy proxy, ThriftPropertyAttribute attribute, ToBytesAnalyseResult analyseResult, object target, bool isArrayElement = false, bool isNullable = false)
         {
-            byte value = analyseResult.GetValue<byte>(target);
+			byte value;
+			if (!isNullable) value = analyseResult.GetValue<byte>(target);
+			else
+			{
+				byte? nullableValue = analyseResult.GetValue<byte?>(target);
+				if (nullableValue == null)
+				{
+					if (!attribute.Optional) return;
+					throw new PropertyNullValueException(
+						string.Format(ExceptionMessage.EX_PROPERTY_VALUE, attribute.Id,
+										analyseResult.Property.Name,
+										analyseResult.Property.PropertyType));
+				}
+				value = (byte)nullableValue;
+			}
             proxy.WriteSByte((sbyte)attribute.PropertyType);
             proxy.WriteInt16(((short)attribute.Id).ToBigEndian());
             proxy.WriteByte(value);
