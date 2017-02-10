@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gridsum.NHBaseThrift", "NHBaseThrift\Gridsum.NHBaseThrift.csproj", "{BCD9FF49-D6E8-4C64-825C-A39414BB27F9}"
 EndProject
@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C0FC8A
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gridsum.NHBaseThrift.UnitTests", "Gridsum.NHBase.UnitTests\Gridsum.NHBase.UnitTests\Gridsum.NHBaseThrift.UnitTests.csproj", "{14BC02A5-882E-4F39-94E1-E99DF92BDFD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,10 @@ Global
 		{499EB63C-D74C-47E8-AE48-A2FC94538E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{499EB63C-D74C-47E8-AE48-A2FC94538E9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{499EB63C-D74C-47E8-AE48-A2FC94538E9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14BC02A5-882E-4F39-94E1-E99DF92BDFD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14BC02A5-882E-4F39-94E1-E99DF92BDFD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14BC02A5-882E-4F39-94E1-E99DF92BDFD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14BC02A5-882E-4F39-94E1-E99DF92BDFD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

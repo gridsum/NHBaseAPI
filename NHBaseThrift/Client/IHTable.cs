@@ -105,6 +105,17 @@ namespace Gridsum.NHBaseThrift.Client
 		/// <exception cref="CommunicationFailException">通信失败</exception>
 		/// <returns>Scanner对象</returns>
 	    Scanner NewScanner(byte[] startKey, byte[] endKey, List<string> columns , Dictionary<string, string> attribute = null);
+	    /// <summary>
+	    ///    获取一段范围的数据行的scanner
+	    /// </summary>
+	    /// <param name="scan">A Scan object is used to specify scanner parameters</param>
+	    /// <param name="attribute">attribute</param>
+	    /// <exception cref="IOErrorException">IO错误</exception>
+	    /// <exception cref="ArgumentNullException">参数不能为空</exception>
+	    /// <exception cref="CommunicationTimeoutException">通信超时</exception>
+	    /// <exception cref="CommunicationFailException">通信失败</exception>
+	    /// <returns>Scanner对象</returns>
+	    Scanner NewScanner(TScan scan, Dictionary<string, string> attribute = null);
 
 	    #endregion
     }

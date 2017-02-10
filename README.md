@@ -173,5 +173,33 @@ while ((info = scanner.GetNext()) != null)
 }
 ```
 
+#### - Read multiple lines of data through the filter
+```csharp
+TScan scan = new TScan()
+{
+	StartRow = new byte[] {0},
+	StopRow = new byte[] {0xff},
+	FilterString = "SingleColumnValueFilter('cf','column1',=,'regexstring:value[23]4')",
+	//FilterString = "SingleColumnValueFilter('cf','column1',=,'substring:value2')",
+	Columns = new[] {"cf:column1"}
+};
+Scanner scanner = table.NewScanner(scan);
+try
+{
+	while ((info = scanner.GetNext()) != null)
+	{
+		tmpDictionary[info.RowKey] = new Dictionary<string, string>();
+		foreach (KeyValuePair<string, Cell> pair in info.Columns)
+		{
+			 //pair contains the retrieved data
+		}
+	}
+}
+catch(Exception ex)
+{
+	scanner.Dispose();
+}
+```
+
 ##Expectations##
 We are eager and thankful to receive valuable suggestions from every developers. We will continue improving this API in the future, and will continually make more contributions for .NET open source community.
