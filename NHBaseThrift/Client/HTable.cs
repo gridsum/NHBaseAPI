@@ -20,12 +20,17 @@ namespace Gridsum.NHBaseThrift.Client
         /// <summary>
         ///    HBase表
         /// </summary>
-		public HTable(string tableName, HBaseClient client, IHostMappingManager hostMappingManager)
+		public HTable(string tableName, HBaseClient client, IHostMappingManager hostMappingManager, IHTableRegionManager regionManager = null)
         {
             _client = client;
             _hostMappingManager = hostMappingManager;
             TableName = tableName;
-            EnsureHTableRegions();
+            if (!client.IsExclusiveMode) EnsureHTableRegions();
+            else
+            {
+                if (regionManager == null) throw new ArgumentException("#Cannot ignore \"regionManager\" field when client is running on the exclusive mode.");
+                lock (_lockObj) _regions[TableName] = _regionManager = regionManager;
+            }
         }
 
         #endregion

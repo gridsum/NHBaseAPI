@@ -156,6 +156,7 @@
     <Compile Include="Exceptions\BadFormatException.cs" />
     <Compile Include="Exceptions\ZooKeeperInitializationException.cs" />
     <Compile Include="Exceptions\IPMappingFailException.cs" />
+    <Compile Include="ExclusiveHTableRegionManager.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="HTableRegionManager.cs" />
     <Compile Include="Client\IHBaseClient.cs" />
