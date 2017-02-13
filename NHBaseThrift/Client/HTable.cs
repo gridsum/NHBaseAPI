@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using Gridsum.NHBaseThrift.Comparator;
 using Gridsum.NHBaseThrift.Exceptions;
 using Gridsum.NHBaseThrift.Objects;
@@ -64,6 +62,7 @@ namespace Gridsum.NHBaseThrift.Client
 		/// <exception cref="CommunicationFailException">通信失败</exception>
         public void Enable()
         {
+			throw new NotImplementedException();
         }
 
         /// <summary>
@@ -100,7 +99,7 @@ namespace Gridsum.NHBaseThrift.Client
 				mutations[i].Value = columnInfos[i].Value;
 	        }
             IPEndPoint iep = _regionManager.GetRegionByRowKey(rowKey);
-            if(iep == null) throw new RegionNotFoundException(string.Format("#Couldn't found any matched RS by specified row key: {0}", rowKey));
+			if (iep == null) throw new RegionNotFoundException(string.Format("#Couldn't found any matched RS by specified row key: {0}", BitConverter.ToString(rowKey)));
             _client.InsertRow(TableName, rowKey, iep, mutations);
         }
 

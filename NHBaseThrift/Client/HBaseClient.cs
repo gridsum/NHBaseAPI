@@ -130,14 +130,20 @@ namespace Gridsum.NHBaseThrift.Client
                 throw new ArgumentException("#Lost KEY argument: \"rsServers\" or empty value on the exclusive mode.");
             IsExclusiveMode = exclusiveMode;
             //INITIALIZATION.
-            if (!exclusiveMode)
-            {
-                _zkClient = new ZooKeeper(zkStr, zkTimeout, new ZooKeeperWatcher(WaitForZooKeeperInitialization));
-                if (!_zooKeeperInitLock.WaitOne(new TimeSpan(0, 0, 30))) throw new ZooKeeperInitializationException();
-                _tracing.Info("#Sync remote ZooKeeper state succeed.");
-                UpdateRegionServers(null);
-            }
-            else _exclusiveModeRegionManager = new ExclusiveHTableRegionManager(rsServersStr);
+	        if (!exclusiveMode)
+	        {
+		        _zkClient = new ZooKeeper(zkStr, zkTimeout, new ZooKeeperWatcher(WaitForZooKeeperInitialization));
+		        if (!_zooKeeperInitLock.WaitOne(new TimeSpan(0, 0, 30))) throw new ZooKeeperInitializationException();
+		        _tracing.Info("#Sync remote ZooKeeper state succeed.");
+		        UpdateRegionServers(null);
+	        }
+	        else
+	        {
+				ExclusiveHTableRegionManager hTableRegionManager = new ExclusiveHTableRegionManager(rsServersStr);
+		        _exclusiveModeRegionManager = hTableRegionManager;
+		        IList<IPEndPoint> regionServers = hTableRegionManager.GetIpEndPoints();
+				Interlocked.Exchange(ref _regionServers, regionServers);
+	        }
         }
 
         //release control until we have made sure the remote ZooKeeper's state.
