@@ -72,8 +72,8 @@ Settings in the ConnectionStr:
 |minConnection|1|Minimum connections maintained for the same remote TCP IP and port|Y|
 |maxConnection|3|Maximum connections maintained for the same remote TCP IP and port|Y|
 |allowPrintDumpInfo|false|Allow or not the printing of network errors’ details when such internal errors occurred|Y|
-|exclusiveMode|false|Forced region server mode, when exclusiveMode is true, client will initialize rsServers by given server list(rsServers)|N|
-|rsServers|null|Forced region server list. format：`rsServers=ip:port,ip:port`|N|
+|exclusiveMode|false|Forced region server mode, when exclusiveMode is true, client will initialize rsServers by given server list(rsServers)|Y|
+|rsServers|null|Forced region server list. format：`rsServers=ip:port,ip:port`|Y|
 
 - Create Table Operation
 ```csharp

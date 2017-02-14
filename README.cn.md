@@ -86,8 +86,8 @@ IHBaseClient client = new HBaseClient(connectionStr)
 |minConnection|1|针对相同的远端TCP IP和端口情况下所保持的最小连接数|Y|
 |maxConnection|3|针对相同的远端TCP IP和端口情况下所保持的最大连接数|Y|
 |allowPrintDumpInfo|false|是否允许在内部出现错误时在日志中打印出网络错误所包含的详细信息|Y|
-|exclusiveMode|false|RS 资源专有模式，如果开启的话，系统内部将会遵从 rsServers 来初始化远程服务器列表|N|
-|rsServers|null|RS IP 列表，格式为：`rsServers=ip:port,ip:port`|N|
+|exclusiveMode|false|RS 资源专有模式，如果开启的话，系统内部将会遵从 rsServers 来初始化远程服务器列表|Y|
+|rsServers|null|RS IP 列表，格式为：`rsServers=ip:port,ip:port`|Y|
 
 #### - 创建表操作
 ```csharp
