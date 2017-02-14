@@ -12,7 +12,6 @@ using Gridsum.NHBaseThrift.Network.Transactions;
 using Gridsum.NHBaseThrift.Objects;
 using Gridsum.NHBaseThrift.Proxies;
 using KJFramework.EventArgs;
-using KJFramework.Messages.ValueStored.DataProcessor;
 using KJFramework.Tracing;
 using ZooKeeperNet;
 
@@ -24,7 +23,7 @@ namespace Gridsum.NHBaseThrift.Client
     public class HBaseClient :  IHBaseClient
     {
         #region Constructor.
-        
+
         /// <summary>
         ///     HBase基于Thrift通信协议的客户端实现
         /// </summary>
@@ -40,6 +39,8 @@ namespace Gridsum.NHBaseThrift.Client
         ///     <para>* minConnection=1 (针对相同的远端TCP IP和端口情况下所保持的最小连接数, 默认为1)</para>
         ///     <para>* maxConnection=3 (针对相同的远端TCP IP和端口情况下所保持的最大连接数, 默认为3)</para>
         ///     <para>* allowPrintDumpInfo=false (是否允许在内部出现错误时在日志中打印出网络错误所包含的详细信息)</para>
+        ///     <para>* exclusiveMode=false (RS 资源专有模式，如果开启的话，系统内部将会遵从 rsServers 来初始化远程服务器列表)</para>
+        ///     <para>* rsServers=ip:port,ip:port; (RS IP 列表，如果同时 exclusiveMode=true 的话系统内部将会通过这个字段来初始化远程服务器，从而替代使用 zookeeper 来获取 RegionServer)</para>
         /// </param>
         /// <exception cref="ArgumentException">参数错误</exception>
         /// <exception cref="ArgumentNullException">参数不能为空</exception>
@@ -68,8 +69,10 @@ namespace Gridsum.NHBaseThrift.Client
         private int _tPort;
         private ZooKeeper _zkClient;
         private IList<IPEndPoint> _regionServers;
+        internal bool IsExclusiveMode { get; set; }
         private Dictionary<string, string> _arguments;
         private static ThriftProtocolConnectionPool _connectionPool;
+        private IHTableRegionManager _exclusiveModeRegionManager;
         private static readonly HostMappingManager _hostMappingManager;
         private AutoResetEvent _zooKeeperInitLock = new AutoResetEvent(false);
         private static readonly ThriftProtocolStack _protocolStack = new ThriftProtocolStack();
@@ -85,10 +88,16 @@ namespace Gridsum.NHBaseThrift.Client
         {
             _arguments = connectionStr.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries).Select(v => v.Split(new[] { "=" }, StringSplitOptions.RemoveEmptyEntries)).ToDictionary(v => v[0].Trim(), vs => vs[1]);
             string zkStr, zkTimeoutStr;
-            if(!_arguments.TryGetValue("zk", out zkStr)) throw new ArgumentException("#Lost KEY argument: \"zk\"");
+            if(!_arguments.TryGetValue("zk", out zkStr)) zkStr = string.Empty;
             TimeSpan zkTimeout;
             if (!_arguments.TryGetValue("zkTimeout", out zkTimeoutStr)) zkTimeout = new TimeSpan(0, 0, 30);
             else zkTimeout = TimeSpan.Parse(zkTimeoutStr);
+            //EXCLUSIVE MODE DETECTION
+            string exclusiveModeStr, rsServersStr;
+            if (!_arguments.TryGetValue("exclusiveMode", out exclusiveModeStr))
+                exclusiveModeStr = string.Empty;
+            if (!_arguments.TryGetValue("rsServers", out rsServersStr))
+                rsServersStr = string.Empty;
             string portStr;
             if (!_arguments.TryGetValue("tPort", out portStr)) _tPort = 9090;
             else _tPort = int.Parse(portStr);
@@ -113,11 +122,28 @@ namespace Gridsum.NHBaseThrift.Client
             if (!_arguments.TryGetValue("allowPrintDumpInfo", out allowPrintDumpInfoStr)) allowPrintDumpInfo = false;
             else allowPrintDumpInfo = bool.Parse(allowPrintDumpInfoStr);
             Global.AllowedPrintDumpInfo = allowPrintDumpInfo;
-
-            _zkClient = new ZooKeeper(zkStr, zkTimeout, new ZooKeeperWatcher(WaitForZooKeeperInitialization));
-            if (!_zooKeeperInitLock.WaitOne(new TimeSpan(0, 0, 30))) throw new ZooKeeperInitializationException();
-            _tracing.Info("#Sync remote ZooKeeper state succeed.");
-            UpdateRegionServers(null);
+            //RUNNING MODE DETECTION.
+            bool exclusiveMode = (!string.IsNullOrEmpty(exclusiveModeStr) && bool.Parse(exclusiveModeStr.ToLower()));
+            if (string.IsNullOrEmpty(zkStr) && !exclusiveMode)
+                throw new ArgumentException("#Lost KEY argument: \"zk\" without in the exclusive mode.");
+            if(exclusiveMode && string.IsNullOrEmpty(rsServersStr))
+                throw new ArgumentException("#Lost KEY argument: \"rsServers\" or empty value on the exclusive mode.");
+            IsExclusiveMode = exclusiveMode;
+            //INITIALIZATION.
+	        if (!exclusiveMode)
+	        {
+		        _zkClient = new ZooKeeper(zkStr, zkTimeout, new ZooKeeperWatcher(WaitForZooKeeperInitialization));
+		        if (!_zooKeeperInitLock.WaitOne(new TimeSpan(0, 0, 30))) throw new ZooKeeperInitializationException();
+		        _tracing.Info("#Sync remote ZooKeeper state succeed.");
+		        UpdateRegionServers(null);
+	        }
+	        else
+	        {
+				ExclusiveHTableRegionManager hTableRegionManager = new ExclusiveHTableRegionManager(rsServersStr);
+		        _exclusiveModeRegionManager = hTableRegionManager;
+		        IList<IPEndPoint> regionServers = hTableRegionManager.GetIpEndPoints();
+				Interlocked.Exchange(ref _regionServers, regionServers);
+	        }
         }
 
         //release control until we have made sure the remote ZooKeeper's state.
@@ -199,7 +225,7 @@ namespace Gridsum.NHBaseThrift.Client
             transaction.SendRequest(reqMsg);
             autoResetEvent.WaitOne();
             if (ex != null) throw ex;
-			return new HTable(reqMsg.TableName, this, _hostMappingManager);
+			return new HTable(reqMsg.TableName, this, _hostMappingManager, _exclusiveModeRegionManager);
         }
 
         /// <summary>
@@ -209,7 +235,7 @@ namespace Gridsum.NHBaseThrift.Client
         /// <returns>如果获取成功，则返回可以操作该表的实例</returns>
         public IHTable GetTable(string tableName)
         {
-			return new HTable(tableName, this, _hostMappingManager);
+			return new HTable(tableName, this, _hostMappingManager, _exclusiveModeRegionManager);
         }
 
         /// <summary>
