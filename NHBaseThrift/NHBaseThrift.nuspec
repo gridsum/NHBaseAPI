@@ -4,14 +4,14 @@
 		<id>Gridsum.NHBaseAPI</id>
 		<version>$version$</version>
 		<title>Gridsum.NHBaseAPI</title>
-		<authors>Kevin Yang,Zhishen Cui,Kexin Li</authors>
-		<owners>Kevin Yang,Zhishen Cui,Kexin Li</owners>
+		<authors>Kevin Yang,Kexin Li</authors>
+		<owners>Kevin Yang,Kexin Li</owners>
 		<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
 		<projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
 		<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>HBase .NET client library</description>
-		<releaseNotes>Modified two small bugs. (1)Return row key change to byte[]. (2)ThriftObjectFullName exception.</releaseNotes>
+		<releaseNotes>(1)Support ScannerOpenWithScan. (2) Support Thrift service round robin load balancing </releaseNotes>
 		<copyright>Copyright 2015</copyright>
 		<tags>HBase Thrift</tags>
 		<dependencies>
