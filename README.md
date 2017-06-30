@@ -1,21 +1,21 @@
 # NHBaseAPI
 -----
 
-##Preface##
+## Preface
 NHBaseAPI is an HBase API based completely on .NET platform. Internally it uses the interface under the Thrift protocol to communicate with HBase. As an API based completely on .NET platform, we deliberately preserve the multi-platform feature within it, which means developers can use the API on Mono platform in Linux without the need to change any NHBaseAPI codes.
 
 
-##Intro##
+## Intro
 Since this API is relying on the Thrift to parse the communication with remote HBase servers, the Thrift protocol version that we follow is 0.9.2. However, within the NHBaseAPI, we have completely overwritten the Thrift protocol. That is to say, that we achieved an automatic high performance realization of the Thrift protocol following the binary feature of the original Thrift. The reasons of doing such are primarily the following two:
 
-###- Performance Issue###
+- Performance Issue
 The original Thrift is mainly consisted of two parts (the Network Layer and the Serialization/Deserialization). First, when realizing the Network Layer, the original Thrift protocol stack fails to realize the routine scenario of sending a complete message package to the remote server. Such defect could lead to enormous waste of performance at the server end. And second as to the Serialization, the original Thrift realized it in a way that would produce huge amounts of memory fragments in the Managed Heap, which again lead to enormous consumption of memory.
 
-###- BUG###
+- BUG
 There is a bug in the original Thrift realization of the Network Layer. Whenever a message is sent, the SEQID from the protocol stack would always be 0. This bug has directly caused applications to malfunction under the multithreading circumstance, unless we manually control the synchronization of the multiple threads, which would then reduce the application’s output at a significant level.
 Thus, when designing the interfaces, we have planned thoroughly and carefully, and have greatly lessen the pre-knowledge of using this API while satisfying routine usage. Apart from that, NHBaseAPI is also easy to use due to its inner operating mechanisms, such as automatic computing of the distribution of Region Servers, automatic reconnection, automatic load balance of multiple TCP SOCKET request, and etc.
 
-##The Advantages of NHBaseAPI##
+## The Advantages of NHBaseAPI
 - Automatically acquire the resource information of HBase from remote ZooKeeper
 - Automatically acquire the Region distribution information of tables before handling any HBase table operations, and automatically distribute the request to different Region Servers while handling such operations according to the distribution information
 - Automatically update the Region information of HBase tables
@@ -25,7 +25,7 @@ Thus, when designing the interfaces, we have planned thoroughly and carefully, a
 	- MSIL level realization of .NET reflection, with completely no boxing/unboxing operations
 	- Adopt Unmanaged memory application and Managed pointer operation regarding the usage of some hot memory
 	- Use understratum SOCKET plus Windows IOCP high performance network model to realize the Network Layer, ensuring the minimum cost of network connection
-	- The Network Layer will maintain multiple TCL connection for each Region Server, so as to balance loads for each one
+	- The Network Layer will maintain multiple TCP connection for each Region Server, so as to balance loads for each one
 - Very friendly to use. Only a ConnectionStr is needed to initialize NHBaseAPI
 - Provide interface for Batch writing request, and also support sending requests automatically in batches according to the number of Region Servers
 - Decent global error handling
@@ -36,7 +36,7 @@ Thus, when designing the interfaces, we have planned thoroughly and carefully, a
 
 In the current interface design, we only provide some basic functions for HBase operations, and only provide synchronous methods for these operations. However in the following versions, we will provide asynchronous methods as well. Currently we support the following basic operations.
 
-##NHBaseAPI Supported Functions##
+## NHBaseAPI Supported Functions
 - Table Level Operations
 	- Create Table
 	- Delete Table
@@ -54,7 +54,7 @@ In the current interface design, we only provide some basic functions for HBase 
 	- Automatically acquire a RowKey distribution in a HBase table from ZooKeeper when creating a HBase table instance (HTable)
 	- Support automatic update/maintenance of an HTable’s RowKey distribution during the table’s life cycle
 
-##How to Use NHBaseAPI##
+## How to Use NHBaseAPI
 - Create an NHBaseAPI Client Instance
 You may be surprised to find out that, you only need to input a ConnectionStr to create an NHBaseAPI Client Instance.
 ```csharp
@@ -173,5 +173,5 @@ while ((info = scanner.GetNext()) != null)
 }
 ```
 
-##Expectations##
+## Expectations
 We are eager and thankful to receive valuable suggestions from every developers. We will continue improving this API in the future, and will continually make more contributions for .NET open source community.
